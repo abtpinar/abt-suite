@@ -1,0 +1,7 @@
+<app-modal *ngIf="modalIsOpen$ | async" [id]="'mobile-modal'" [title]="'nuevo'">
+    <ng-container template="modalContent">
+        <app-mobile-form [entity]="entity$ | async" [availableBrands]="availableBrands$ | async" [availableModels]="availableModels$ | async"
+            (createEvent)="create($event)" (updateEvent)="update($event)" (cancelEvent)="close()">
+        </app-mobile-form>
+    </ng-container>
+</app-modal>

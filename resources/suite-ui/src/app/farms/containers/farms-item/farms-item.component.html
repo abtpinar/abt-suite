@@ -1,0 +1,58 @@
+<div class="main-content">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12">
+
+				<!-- HEADER -->
+				<div class="header">
+
+					<!-- Body -->
+					<div class="header-body">
+						<div class="row align-items-end">
+							<div class="col">
+
+								<!-- Pretitle -->
+								<h6 class="header-pretitle">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a [routerLink]="['/']"><span>{{
+														'pages.home' | appTrans }}</span></a></li>
+											<li class="breadcrumb-item"><a [routerLink]="['/', 'farms']"><span>{{
+														'farms-page.title' | appTrans }}</span></a></li>
+											<!-- <li class="breadcrumb-item active" aria-current="page"><span appTrans="new-client-form.title"></span></li> -->
+										</ol>
+									</nav>
+								</h6>
+
+								<!-- Title -->
+								<h1 class="header-title">
+									<span *ngIf="!!(farm$ | async)"
+										appTrans="farms-form.edit.farm.tittle"></span>
+									<span *ngIf="!(farm$ | async)"
+										appTrans="farms-form.new.farm.tittle"></span>
+								</h1>
+
+							</div>
+
+						</div> <!-- / .row -->
+
+					</div> <!-- / .header-body -->
+
+				</div> <!-- / .header -->
+
+
+
+				<div *ngIf="(isLoading$ | async)" class="text-center"
+					style="position: absolute;z-index: 9999;left: 50%;top: 50%;">
+					<app-loading-box></app-loading-box>
+				</div>
+
+
+				<!--[availableCodeTables]="availableCodeTables$ | async" [availableTobaccoClasses]="availableTobaccoClasses$ | async" [availableProducts]="availableProducts$ | async" [contract]="contract$ | async" --> <!--(create)="create($event)" (update)="update($event)"-->
+				<app-farm-form [initialFarmer]="farmer$ | async" [availableCodeTables] = "availableCodeTables$ | async" [farm] = "farm$ | async" (create)="create($event)" (update)="update($event)">
+				</app-farm-form>
+
+			</div>
+		</div>
+	</div>
+</div>

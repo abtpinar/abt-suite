@@ -1,0 +1,74 @@
+<div [formGroup]="form">
+
+
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'classes-page.class.tobacco_type' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <app-select [entities]="availableTobaccoType" [prop]="'tobacco_type'" [idProp]="'code'" [displayProp]="'name'" formControlName="tobacco_type"></app-select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'classes-page.class.name' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="name" name="name">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'classes-page.class.price' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="number" class="form-control" formControlName="price" name="price">
+        </div>
+      </div>
+
+      <div class="col-md-12"><hr></div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>{{ 'classes-page.class.type' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <app-select [entities]="availableClassesTypes" [prop]="'type'" [idProp]="'code'" [displayProp]="'name'" formControlName="type"
+            (onSelectedEntity)="handleGroups($event)"></app-select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>{{ 'classes-page.class.group' | appTrans }}</label>
+          <app-select [entities]="availableFilteredGroups" [prop]="'group'" [idProp]="'code'" [displayProp]="'name'" formControlName="group"></app-select>
+        </div>
+      </div>      
+
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row align-items-end">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-light" (click)="cancelEvent.emit()" data-dismiss="class-modal" aria-label="Close">
+              {{ 'btn-cancel' | appTrans }}
+            </a>
+            <button type="submit" class="btn btn-primary ml-2" (click)="onSave(form)"
+                    [disabled]="!form.valid">
+              <i class="fa fa-spin fa-refresh"></i>
+              {{ 'btn-save' | appTrans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

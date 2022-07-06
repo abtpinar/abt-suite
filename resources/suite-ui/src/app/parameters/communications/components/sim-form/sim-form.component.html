@@ -1,0 +1,63 @@
+<div [formGroup]="form">
+
+
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'sims-page.sim.number' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="number" name="number">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'sims-page.sim.pin' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="pin" name="pin">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'sims-page.sim.puk' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="puk" name="puk">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'sims-page.sim.ip' | appTrans }}</label>
+          <input type="text" class="form-control" formControlName="ip_address" name="ip_address">
+        </div>
+      </div>    
+
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row align-items-end">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-light" (click)="cancelEvent.emit()" data-dismiss="modal" aria-label="Close">
+              {{ 'btn-cancel' | appTrans }}
+            </a>
+            <button type="submit" class="btn btn-primary ml-2" (click)="onSave(form)"
+                    [disabled]="!form.valid">
+              <i class="fa fa-spin fa-refresh"></i>
+              {{ 'btn-save' | appTrans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

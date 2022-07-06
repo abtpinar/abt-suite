@@ -1,0 +1,22 @@
+<div [ngSwitch]="filterInput.type">
+  <app-text-filter
+    *ngSwitchCase="'text'"
+    [clear]="clear"
+    [filterInput]="filterInput"
+    (dataEvent)="dataEvent.emit($event)">
+  </app-text-filter>
+
+  <app-select-filter
+    *ngSwitchCase="'select'"
+    [clear]="clear"
+    [filterInput]="filterInput"
+    (dataEvent)="dataEvent.emit($event)">
+  </app-select-filter>
+
+  <app-date-filter
+    *ngSwitchCase="'date'"
+    [clear]="clear"
+    [filterInput]="filterInput"
+    (dataEvent)="dataEvent.emit($event)">
+  </app-date-filter>
+</div>

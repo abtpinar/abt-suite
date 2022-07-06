@@ -1,0 +1,2 @@
+describe('common.components.LoadingBoxComponent', () => {
+});

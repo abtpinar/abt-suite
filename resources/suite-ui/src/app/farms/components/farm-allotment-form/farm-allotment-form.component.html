@@ -1,0 +1,69 @@
+<app-loading-box *ngIf="isSaving || !items"></app-loading-box>
+
+<form novalidate #editForm="ngForm" (submit)="saveChanges($event)">
+    <div class="card-body" *ngIf="items">
+        <div class="row">
+            <!-- Name -->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="area" appTrans="edit-contact.name">Area</label>
+                    <span class="text-danger">&nbsp;*</span>
+                    <!-- <&lt;!&ndash;app-select [entities]="availableProducts"
+                         [prop]="(items.basic ? 'b' : '') + 'product_id'" [displayProp]="'name'" [idProp]="'id'"
+                         [(ngModel)]="itemClone.product_id" [ngModelOptions]="{standalone: true}"
+                         (onSelectedEntity)="handleProduct($event)"
+                         #productModel="ngModel"></app-select>&ndash;&gt;-->
+                    <input type="text" class="form-control" id="area" name="area" [(ngModel)]="itemClone.area" required>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label appTrans="edit-contact.email">Nro</label>
+                    <input type="number" class="form-control" id="number" name="number" [(ngModel)]="itemClone.number" required>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label appTrans="edit-contact.email" for="division">Division</label>
+                    <input type="number" class="form-control" id="division" name="division" [(ngModel)]="itemClone.division" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label appTrans="edit-contact.email">Tipo de uso</label>
+                    <!--<input type="text" class="form-control" id="tipo_uso" name="tipo_uso" >-->
+                    <app-select
+                            [entities]="items.availableCodeTables"
+                            [prop]="'uasage_type_code'" [displayProp]="'name'" [idProp]="'code'"
+                            [(ngModel)]="itemClone.usage_type_code" [ngModelOptions]="{standalone: true}" required="true">
+                    </app-select>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-md-2">
+          <div class="form-group">
+            <label appTrans="edit-contact.email" for="import">Importe</label>
+            <input type="text" class="form-control" id="import" name="import"
+              [value]="(itemClone.amount * itemClone.price | number:'1.2-2') || '0.00'" readonly>
+          </div>
+        </div>-->
+    </div>
+
+
+    <div class="card-footer">
+        <div class="row align-items-center">
+            <div class="col">
+            </div>
+            <div class="col-auto">
+                <a type="button" class="btn btn-sm btn-light mr-3" appTrans="edit-client-form.close"
+                   (click)="cancelEdition()">Cancelar</a>
+                <button type="submit" class="btn btn-sm btn-primary" appTrans="edit-client-form.save-changes"
+                        [disabled]="!editForm.valid">Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>

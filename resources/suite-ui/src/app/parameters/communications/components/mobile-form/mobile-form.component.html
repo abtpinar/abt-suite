@@ -1,0 +1,87 @@
+<div [formGroup]="form">
+
+
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'mobiles-page.mobile.imei' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="imei" name="imei">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'mobiles-page.mobile.imei2' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="imei2" name="imei2">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'mobiles-page.mobile.mac' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="mac" name="mac">
+        </div>
+      </div>
+
+      <div class="col-md-12"><hr></div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>{{ 'mobiles-page.mobile.brand' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <div *ngIf="!isNewBrand" class="input-group">
+            <app-select [entities]="availableBrands" [prop]="'brand'" [idProp]="'id'" [displayProp]="'name'" formControlName="brand"
+              (onSelectedEntity)="handleModels($event)"></app-select>
+            <span class="input-group-btn">
+              <button (click)="handleNewBrand()" class="btn btn-default"><i class="fe fe-plus"></i></button>
+            </span>
+          </div>          
+          <input *ngIf="isNewBrand" type="text" class="form-control" formControlName="brand" name="brand">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>{{ 'mobiles-page.mobile.model' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <div *ngIf="!isNewModel" class="input-group">
+            <app-select [entities]="availableFilteredModels" [prop]="'model'" [idProp]="'id'" [displayProp]="'name'" formControlName="model"></app-select>
+            <span class="input-group-btn">
+              <button (click)="isNewModel = true" class="btn btn-default"><i class="fe fe-plus"></i></button>
+            </span>
+          </div>          
+          <input *ngIf="isNewModel" type="text" class="form-control" formControlName="model" name="model">
+        </div>
+      </div>      
+
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row align-items-end">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-light" (click)="cancelEvent.emit()" data-dismiss="modal" aria-label="Close">
+              {{ 'btn-cancel' | appTrans }}
+            </a>
+            <button type="submit" class="btn btn-primary ml-2" (click)="onSave(form)"
+                    [disabled]="!form.valid">
+              <i class="fa fa-spin fa-refresh"></i>
+              {{ 'btn-save' | appTrans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

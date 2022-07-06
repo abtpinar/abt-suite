@@ -1,0 +1,40 @@
+		<div class="modal fade" id="employee-selection-modal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-card card" data-toggle="lists" data-lists-values="[&quot;name&quot;]">
+					<div class="card-header">
+						<div class="row align-items-center">
+							<div class="col">
+
+								<!-- Title -->
+								<h4 class="card-header-title">
+									Seleccione Empleado
+								</h4>
+
+							</div>
+							<div class="col-auto">
+
+								<!-- Close -->
+								<button (click)="closeEvent.emit()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+
+							</div>
+						</div> <!-- / .row -->
+					</div>
+
+					<app-base-table
+							[isLoading]="isLoading$ | async"
+							[configuration]="tableConfig"
+							[isModal]="true"
+							[paginationInfo]="paginationInfo$ | async"
+							[data]="employees$ | async"
+							(itemEdit)="setSelectedEmployee($event)"
+							(searchRequest)="onSearch($event)"
+							(pageRequest)="loadPage($event)"
+					></app-base-table>
+
+				</div>
+			</div>
+		</div>
+	</div>

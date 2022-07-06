@@ -1,0 +1,105 @@
+<div class="loading-container" *ngIf="isLoading">
+    <app-loading-box></app-loading-box>
+</div>
+
+<div [class.invisible]="isEditing">
+
+
+    <div class="table-responsive" *ngIf="items.length">
+        <table class="table table-sm card-table">
+            <thead>
+                <!--<tr *ngIf="isReadOnly">
+                    <th appTrans="edit-contact.email">Unidad de Medida: <strong>Miles/Posturas</strong></th>
+
+                    <th appTrans="edit-contact.email" colspan="2" class="text-center"
+                        style="border-left:1px solid #1e3a5c">Decenas {{'month.name.8'|appTrans}}</th>
+                    <th appTrans="edit-contact.email" colspan="3" class="text-center"
+                        style="border-left:1px solid #1e3a5c">Decenas {{'month.name.9'|appTrans}}</th>
+                    <th appTrans="edit-contact.email" colspan="3" class="text-center"
+                        style="border-left:1px solid #1e3a5c">Decenas {{'month.name.10'|appTrans}}</th>
+                    <th appTrans="edit-contact.email" colspan="2" class="text-center"
+                        style="border-left:1px solid #1e3a5c">Decenas {{'month.name.11'|appTrans}}</th>
+                </tr>
+                <tr *ngIf="isReadOnly">
+                    <th appTrans="edit-contact.name">Variedad</th>
+                    <th appTrans="edit-contact.email" class="text-center" style="border-left:1px solid #1e3a5c">2da</th>
+                    <th appTrans="edit-contact.email" class="text-center">3ra</th>
+
+                    <th appTrans="edit-contact.email" class="text-center" style="border-left:1px solid #1e3a5c">1ra</th>
+                    <th appTrans="edit-contact.email" class="text-center">2da</th>
+                    <th appTrans="edit-contact.email" class="text-center">3ra</th>
+
+                    <th appTrans="edit-contact.email" class="text-center" style="border-left:1px solid #1e3a5c">1ra</th>
+                    <th appTrans="edit-contact.email" class="text-center">2da</th>
+                    <th appTrans="edit-contact.email" class="text-center">3ra</th>
+
+                    <th appTrans="edit-contact.email" class="text-center" style="border-left:1px solid #1e3a5c">1ra</th>
+                    <th appTrans="edit-contact.email" class="text-center">2da</th>
+                </tr>-->
+                <tr>  <!--*ngIf="!isReadOnly"-->
+                    <th>Acciones</th>
+                    <th appTrans="edit-contact.name">Variedad</th>
+                    <th width="150px" appTrans="edit-contact.name">Mes</th>
+                    <th width="130px" appTrans="edit-contact.email" class="text-center">1ra Decena</th>
+                    <th width="130px" appTrans="edit-contact.email" class="text-center">2da Decena</th>
+                    <th width="130px" appTrans="edit-contact.email" class="text-center">3ra Decena</th>
+                    <th width="200px" appTrans="edit-contact.email" class="">Última actualización</th>
+                </tr>
+            </thead>
+
+            <!--<tbody *ngIf="isReadOnly">
+                <tr *ngFor="let item of getView(itemsObservable | async)">
+                    <td>{{ getTobaccoFamilyName(item.family) }}</td>
+                    <td class="text-center">{{item.amount_p2 ? item.amount_p2 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p3 ? item.amount_p3 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p4 ? item.amount_p4 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p5 ? item.amount_p5 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p6 ? item.amount_p6 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p7 ? item.amount_p7 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p8 ? item.amount_p8 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p9 ? item.amount_p9 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p10 ? item.amount_p10 : '-'}}</td>
+                    <td class="text-center">{{item.amount_p11 ? item.amount_p11: '-'}}</td>
+                </tr>
+            </tbody>-->
+
+            <tbody> <!--*ngIf="!isReadOnly"-->
+                <tr *ngFor="let item of itemsObservable | async" (dblclick)="selectItem(item)">
+                    <td width="55px" class="text-center">
+                        <a class="text-danger mr-2 action" (click)="deleteItem(item)">
+                            <i class="fe fe-trash"></i>
+                        </a>
+                    </td>
+                    <td>{{ getTobaccoFamilyName(item.tobacco_family) }}</td>
+                    <td>{{ 'month.name.' + item.month | appTrans}}</td>
+                    <td class="text-center">{{ item.amount_p1 || '-' }}</td>
+                    <td class="text-center">{{ item.amount_p2 || '-' }}</td>
+                    <td class="text-center">{{ item.amount_p3 || '-' }}</td>
+                    <td class="nowrap">{{ item.id ? formatDate(item.updated_at.date, true) : '-' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-body" *ngIf="!items.length">
+        <h4 class="text-center" appTrans="edit-client-list.contact.no-contacts"></h4>
+    </div>
+
+    <div class="card-footer">
+        <div class="row align-items-center">
+            <div class="col">
+                <a class="btn btn-sm btn-primary" data-toggle="modal" (click)="newItem()">
+                    <i class="fe fe-plus"></i> <span appTrans="btn-add"></span>
+                </a>
+                <a class="btn btn-sm btn-primary ml-4" data-toggle="modal" *ngIf="items.length" (click)="isReadOnly=!isReadOnly">
+                    <span *ngIf="!isReadOnly"><i class="fe fe-calendar"></i> Vista Calendario</span>
+                    <span *ngIf="isReadOnly"><i class="fe fe-edit"></i> Editar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [class.invisible]="!isEditing">
+    <app-contract-irrigation-schedule-form #editForm></app-contract-irrigation-schedule-form>
+</div>

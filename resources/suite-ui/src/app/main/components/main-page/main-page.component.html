@@ -1,0 +1,461 @@
+<!-- HEADER -->
+<div class="header">
+  <div class="container">
+
+    <!-- Body -->
+    <div class="header-body">
+      <div class="row align-items-end">
+        <div class="col">
+
+          <!-- Pretitle -->
+          <h6 class="header-pretitle">
+            SUITE
+          </h6>
+
+          <!-- Title -->
+          <h1 class="header-title">
+            Portada
+          </h1>
+
+        </div>
+
+      </div> <!-- / .row -->
+    </div> <!-- / .header-body -->
+
+  </div>
+</div> <!-- / .header -->
+
+
+<!-- CARDS -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-xl">
+
+      <!-- Card -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <!-- Title -->
+              <h6 class="card-title text-uppercase text-muted mb-2">
+                Monto (CL)
+              </h6>
+
+              <!-- Heading -->
+              <span class="h2 mb-0">
+                ${{ amount }}
+              </span>
+
+              <!-- Badge -->
+              <!-- <span class="badge badge-soft-success mt-n1">
+                +3.5%
+              </span> -->
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Icon -->
+              <span class="h2 fe fe-dollar-sign text-muted mb-0"></span>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12 col-lg-6 col-xl">
+
+      <!-- Card -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <!-- Title -->
+              <h6 class="card-title text-uppercase text-muted mb-2">
+                Contratos (CL)
+              </h6>
+
+              <!-- Heading -->
+              <span class="h2 mb-0">
+                {{ farmers }}
+              </span>
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Icon -->
+              <span class="h2 fe fe-briefcase text-muted mb-0"></span>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12 col-lg-6 col-xl">
+
+      <!-- Card -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <!-- Title -->
+              <h6 class="card-title text-uppercase text-muted mb-2">
+                Ejecución del Pago
+              </h6>
+
+              <div class="row align-items-center no-gutters">
+                <div class="col-auto">
+
+                  <!-- Heading -->
+                  <span class="h2 mr-2 mb-0">
+                    {{ percent }}
+                  </span>
+
+                </div>
+                <div class="col">
+
+                  <!-- Progress -->
+                  <div class="progress progress-sm">
+                    <div class="progress-bar" role="progressbar" [style.width]="percent" aria-valuenow="0" aria-valuemin="0"
+                      aria-valuemax="100"></div>
+                  </div>
+
+                </div>
+              </div> <!-- / .row -->
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Icon -->
+              <span class="h2 fe fe-clipboard text-muted mb-0"></span>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12 col-lg-6 col-xl">
+
+      <!-- Card -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <!-- Title -->
+              <h6 class="card-title text-uppercase text-muted mb-2">
+                Pagado hasta la fecha
+              </h6>
+
+              <!-- Heading -->
+              <span class="h2 mb-0">
+                ${{ payment }}
+              </span>
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Icon -->
+              <span class="h2 fe fe-clock text-muted mb-0"></span>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+      </div>
+
+    </div>
+  </div> <!-- / .row -->
+
+  <div class="row">
+    <div class="col-12">
+
+      <!-- Orders -->
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <!-- Title -->
+              <h4 class="card-header-title">
+                Plan de Pagos
+              </h4>
+
+            </div>
+            <div class="col-auto mr-n3">
+
+              <!-- Caption -->
+              <span class="text-muted">
+                Mostrar Real:
+              </span>
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Switch -->
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="cardToggle" data-toggle="chart"
+                  data-target="#ordersChart"
+                  data-add="{&quot;data&quot;:{&quot;datasets&quot;:[{&quot;data&quot;:[15,10,20,12,7,2,8,16,18,16,10,20,12,7,2,8],&quot;backgroundColor&quot;:&quot;#d2ddec&quot;,&quot;label&quot;:&quot;Real&quot;}]}}">
+                <label class="custom-control-label" for="cardToggle"></label>
+              </div>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+        <div class="card-body">
+
+          <!-- Chart -->
+          <div class="chart">
+            <div
+              style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+              class="chartjs-size-monitor">
+              <div class="chartjs-size-monitor-expand"
+                style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+              </div>
+              <div class="chartjs-size-monitor-shrink"
+                style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+              </div>
+            </div>
+            <canvas id="ordersChart" class="chart-canvas chartjs-render-monitor"
+              style="display: block; width: 1001px; height: 300px;" width="1001" height="300"></canvas>
+          </div>
+          <!-- <h4 class="text-center">No hay resultados que mostrar</h4> -->
+
+        </div>
+      </div>
+
+    </div>
+  </div> <!-- / .row -->
+
+  <div class="row">
+    <div class="col-12 col-xl-8">
+
+      <!-- Goals -->
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <!-- Title -->
+              <h4 class="card-header-title">
+                Balance por Unidades
+              </h4>
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Button -->
+              <a href="#!" class="btn btn-sm btn-white">
+                Descargar
+              </a>
+
+            </div>
+          </div> <!-- / .row -->
+        </div>
+        <div class="table-responsive mb-0" data-toggle="lists"
+          data-lists-values="[&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]">
+          <table class="table table-sm table-nowrap card-table">
+            <thead>
+              <tr>
+                <th>
+                  <a href="#" class="text-muted sort" data-sort="goal-project">
+                    Cooperativa
+                  </a>
+                </th>
+                <th>
+                  <a href="#" class="text-muted sort" data-sort="goal-status">
+                    Estado
+                  </a>
+                </th>
+                <th>
+                  <a href="#" class="text-muted sort" data-sort="goal-progress">
+                    Porciento
+                  </a>
+                </th>
+                <th>
+                  <a href="#" class="text-muted sort" data-sort="goal-date">
+                    ultimo Pago
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <ng-container *ngFor="let unit of units; let currentIndex = index">
+              <tr *ngIf="currentIndex < 7">
+                <td class="goal-project">
+                  {{ unit.unit_name }} 
+                </td>
+                <td class="goal-status" [innerHTML]="getUnitStatus(unit)">
+                </td>
+                <td class="goal-progress">
+                  {{ formatDecimal(unit.result, 1) }}%
+                </td>
+                <td class="goal-date">
+                  <time datetime="2018-10-24">07/24/18</time>
+                </td>
+              </tr>
+            </ng-container>
+              <!-- <tr>
+                <td class="goal-project">
+                  CSS 1
+                </td>
+                <td class="goal-status">
+                  <span class="text-warning">●</span> In progress
+                </td>
+                <td class="goal-progress">
+                  55%
+                </td>
+                <td class="goal-date">
+                  <time datetime="2018-10-24">07/24/18</time>
+                </td>
+              </tr>
+              <tr>
+                <td class="goal-project">
+                  CSS 2
+                </td>
+                <td class="goal-status">
+                  <span class="text-warning">●</span> In progress
+                </td>
+                <td class="goal-progress">
+                  25%
+                </td>
+                <td class="goal-date">
+                  <time datetime="2018-10-24">08/26/18</time>
+                </td>
+              </tr>
+              <tr>
+                <td class="goal-project">
+                  CSS 3
+                </td>
+                <td class="goal-status">
+                  <span class="text-success">●</span> Completed
+                </td>
+                <td class="goal-progress">
+                  100%
+                </td>
+                <td class="goal-date">
+                  <time datetime="2018-10-24">06/19/18</time>
+                </td>
+              </tr>
+              <tr>
+                <td class="goal-project">
+                  CSS 4
+                </td>
+                <td class="goal-status">
+                  <span class="text-danger">●</span> Cancelled
+                </td>
+                <td class="goal-progress">
+                  0%
+                </td>
+                <td class="goal-date">
+                  <time datetime="2018-10-24">06/25/18</time>
+                </td>
+              </tr>
+              <tr>
+                <td class="goal-project">
+                  CSS 5
+                </td>
+                <td class="goal-status">
+                  <span class="text-success">●</span> Completed
+                </td>
+                <td class="goal-progress">
+                  100%
+                </td>
+                <td class="goal-date">
+                  <time datetime="2018-10-24">06/30/18</time>
+                </td>
+              </tr> -->
+              <tr *ngIf="!units">
+                <td colspan="4">
+                  <h4 class="text-center">No hay resultados que mostrar</h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12 col-xl-4">
+
+      <!-- Devices -->
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <!-- Title -->
+              <h4 class="card-header-title">
+                % Ejecución
+              </h4>
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Tabs -->
+              <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
+                <li class="nav-item" data-toggle="chart" data-target="#devicesChart"
+                  data-update="{&quot;data&quot;:{&quot;datasets&quot;:[{&quot;data&quot;:[60,25,15]}]}}">
+                  <a href="#" class="nav-link active" data-toggle="tab">
+                    C.L.
+                  </a>
+                </li>
+                <li class="nav-item" data-toggle="chart" data-target="#devicesChart"
+                  data-update="{&quot;data&quot;:{&quot;datasets&quot;:[{&quot;data&quot;:[15,45,20]}]}}">
+                  <a href="#" class="nav-link" data-toggle="tab">
+                    Productores
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+        <div class="card-body">
+
+          <!-- Chart -->
+          <div class="chart chart-appended">
+            <div
+              style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+              class="chartjs-size-monitor">
+              <div class="chartjs-size-monitor-expand"
+                style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+              </div>
+              <div class="chartjs-size-monitor-shrink"
+                style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+              </div>
+            </div>
+            <canvas id="devicesChart" class="chart-canvas chartjs-render-monitor" data-target="#devicesChartLegend"
+              style="display: block; width: 463px; height: 241px;" width="463" height="241"></canvas>
+          </div>
+
+          <h4 class="text-center">No hay resultados que mostrar</h4>
+
+          <!-- Legend -->
+          <div id="devicesChartLegend" class="chart-legend"><span class="chart-legend-item"><i
+                class="chart-legend-indicator" style="background-color: #2C7BE5"></i>Pagado</span><span
+              class="chart-legend-item"><i class="chart-legend-indicator"
+                style="background-color: #A6C5F7"></i>En tramite</span><span class="chart-legend-item"><i
+                class="chart-legend-indicator" style="background-color: #D2DDEC"></i>Pendiente</span></div>
+
+        </div>
+      </div>
+
+    </div>
+  </div> <!-- / .row -->
+</div>

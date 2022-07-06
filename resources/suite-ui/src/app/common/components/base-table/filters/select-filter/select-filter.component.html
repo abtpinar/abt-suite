@@ -1,0 +1,28 @@
+<div>
+  <div class="form-group">
+    <!-- <label>{{ filterInput.textI18n | appTrans }}</label> -->
+
+    <select class="form-control" [class.text-muted]="!filterValue" 
+      [attr.data-toggle]="'select-' + filterInput.field"
+      [(ngModel)]="filterValue" (change)="onSelect($event)"
+      [disabled]="filterInput.disabled">
+      <option value="{{item.id}}" *ngFor="let item of filterInput.data">{{item.name}}</option>
+    </select>
+
+    <!-- <ng-select
+      *ngIf="!filterInput.disabled"
+      [loading]="filterInput.loading"
+      [items]="filterInput.data"
+      [id]="filterInput.field"
+      [disabled]="filterInput.disabled"
+      [multiple]="filterInput.multipleSelection"
+      bindLabel="name"
+      bindValue="id"
+      [name]="filterInput.field"
+      [(ngModel)]="filterValue"
+      placeholder="{{ filterInput.placeholderI18n | appTrans }}"
+      (change)="onSelect($event)"
+    >
+    </ng-select> -->
+  </div>
+</div>

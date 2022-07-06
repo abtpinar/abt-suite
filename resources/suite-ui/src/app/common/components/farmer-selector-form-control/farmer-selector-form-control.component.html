@@ -1,0 +1,21 @@
+<div class="form-group">
+  <label>
+    {{ (label || 'contracts-page.contract.farmer') | appTrans }}
+  </label>
+  <span class="text-danger">&nbsp;*</span>
+  <div class="input-group">
+    <input type="text"
+      class="form-control"
+      [value]="farmerFullName" readonly>
+    <span class="input-group-btn">
+      <button (click)="showSelectionModal()" [disabled]="disable" class="btn btn-default" data-toggle="modal" data-target="#farmer-selection-modal">
+                    <i class="fe fe-search"></i>
+                  </button>
+      <ng-container *ngIf="useCustomTemplate">
+        <ng-content select="[template=customTemplate]"></ng-content>
+      </ng-container>
+    </span>
+  </div>
+</div>
+
+<app-farmer-selection-modal *ngIf="visibleModal" (selectFarmer)="farmerSelected($event)" (closeEvent)="visibleModal=false"></app-farmer-selection-modal>

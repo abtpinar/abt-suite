@@ -1,0 +1,56 @@
+<div class="d-flex align-items-center bg-auth border-top border-top-2 border-primary vh-100" style="display: block;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-6 offset-xl-2 offset-md-1 order-md-2 mb-5 mb-md-0">
+
+                <!-- Image -->
+                <div class="text-center">
+                    <img [src]="'/assets/images/login.svg'" alt="..." class="img-fluid">
+                    <!-- <app-loading-box *ngIf="isAuthenticating"></app-loading-box> -->
+                </div>
+
+            </div>
+            <div class="col-12 col-md-5 col-xl-4 order-md-1 my-5">
+
+                <!-- Heading -->
+                <h1 class="display-4 text-center mb-3">
+                    CRM <b class="upper">{{companyName}}</b>
+                </h1>
+
+                <!-- Subheading -->
+                <p class="text-muted text-center mb-5">
+                    {{authService.user.first_name}} {{authService.user.last_name}}
+                </p>
+
+                <div class="text-center">
+                    <img *ngIf="authService.user.picture" src="{{authService.user.picture}}" alt="User Image"
+                        class="avatar-img rounded-circle mb-5">
+                    <img *ngIf="!authService.user.picture" src="assets/images/avatar.jpg" alt="User Image"
+                        class="avatar-img rounded-circle mb-5">
+                </div>
+
+                <div class="lockscreen-credentials" [formGroup]="lockScreenForm">
+                    <div class="form-group">
+
+                        <!-- Input -->
+                        <input type="password" class="form-control" name="password" formControlName="password"
+                            appTrans="register-form.password" placeholder="true" autofocus />
+
+
+
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-block btn-primary mb-3" (click)="login(lockScreenForm)"
+                        appTrans="register-form.login" [disabled]="isAuthenticating || !lockScreenForm.valid">
+                    </button>
+
+                    <div class="text-center">
+                        <small class="text-muted text-center">
+                            <a (click)="logout()" appTrans="lock-screen.sign-in-other-user"></a>.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- / .row -->
+    </div> <!-- / .container -->
+</div> <!-- / .container -->

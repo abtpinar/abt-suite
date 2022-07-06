@@ -1,0 +1,168 @@
+<!-- Modal: Demo -->
+<div class="modal fade fixed-right" id="modalDemo" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-vertical" role="document">
+    <form class="modal-content" id="demoForm">
+
+      <app-custom-search *ngIf="configuration.searchConfig" [filtersConfig]="configuration.searchConfig"
+                         [sortInfo]="sortInfo$" [has_checkbox]="hasCheckbox()" (search)="searchRequest.emit($event)"
+                         (clear)="clearRequest.emit($event)"
+                         (additionalFiltersToggle)="additionalFiltersToggle.emit($event)"
+                         (dataChanged)="searchInputChange.emit($event)"></app-custom-search>
+
+    </form>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+
+
+        <div class="header" *ngIf="configuration.useHeaderTemplate && !showInSection">
+          <div class="header-body">
+            <div class="row align-items-center">
+              <div class="col">
+                <ng-content select="[template=headerTemplateTitle]"></ng-content>
+              </div>
+              <div class="col-auto pr-1">
+                <ng-container *ngFor="let actionButton of configuration.actionButtons">
+                  <button type="button" [class]="'btn ml-2 ' + actionButton.class "
+                          *ngIf="showActionButton(actionButton)" [disabled]="actionButton.isDisabled"
+                          (click)="actionButton.callback.call()">
+                    <i *ngIf="actionButton.icon" class="fe {{actionButton.icon}}"></i>
+                    <span> {{ actionButton.i18nKey | appTrans }}</span>
+                  </button>
+                </ng-container>
+              </div>
+              <div class="col-auto">
+                <ng-content select="[template=headerTemplateActions]"></ng-content>
+              </div>
+              <div class="col-auto pl-1">
+                <a class="btn btn-primary ml-2" href="#modalDemo" data-toggle="modal">
+                  <span class="fe fe-filter"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="card-header" *ngIf="showInSection">
+            <div class="row align-items-center">
+              <div class="col">
+
+                <!-- Title -->
+                <h4 class="card-header-title">
+                  <ng-content select="[template=cardHeaderTitle]"></ng-content>
+                </h4>
+
+              </div>
+              <div class="col-auto">
+                <ng-container *ngFor="let actionButton of configuration.actionButtons">
+                  <button type="button" [class]="'btn btn-sm btn-primary ml-2' + actionButton.class "
+                          *ngIf="showActionButton(actionButton)" [disabled]="actionButton.isDisabled"
+                          (click)="actionButton.callback.call()" [attr.data-toggle]="actionButton.modalId ? 'modal' : ''" [attr.data-target]="actionButton.modalId ? '#'+actionButton.modalId : ''">
+                    <span> {{ actionButton.i18nKey | appTrans }}</span>
+                  </button>
+                </ng-container>
+              </div>
+              <div class="col-auto">
+                <ng-content select="[template=cardHeaderActions]"></ng-content>
+              </div>
+              <div class="col-auto">
+                <!-- Button -->
+                <a class="btn btn-sm btn-primary ml-2" href="#modalDemo" data-toggle="modal">
+                  <span class="fe fe-filter"></span>
+                </a>
+
+              </div>
+            </div> <!-- / .row -->
+          </div>
+
+          <div class="table-responsive">
+            <div class="text-center" *ngIf="isLoading || (isDownloadingFile$ | async)" style="background-color: rgba(0, 0, 0, .6);
+            height: -webkit-fill-available;
+            width: inherit;
+            position: absolute;
+            z-index: 9998;"></div>
+            <div *ngIf="isLoading || (isDownloadingFile$ | async)" class="text-center"
+                 style="position: absolute;z-index: 9999;left: 50%;top: 50%;">
+              <app-loading-box></app-loading-box>
+            </div>
+            <table class="table table-sm card-table">
+              <thead>
+              <tr>
+                <th *ngIf="configuration.rowActionButtons || configuration.rowActionButtonsGroup">Acciones</th>
+
+                <th *ngFor="let column of getTotalColumns(); index as i" class="text-nowrap">
+                  <a (click)="serverSort(column)" class="text-muted sort" data-sort="" *ngIf="column.sortable">
+                    <app-base-column-header [column]="column" [rowData]="rowData"></app-base-column-header>
+                  </a>
+                  <app-base-column-header [column]="column" [rowData]="rowData" *ngIf="!column.sortable">
+                  </app-base-column-header>
+                </th>
+              </tr>
+              </thead>
+              <tbody class="list">
+              <tr *ngFor="let item of data; index as i" (dblclick)="requestEdit(item)">
+
+                <td class="text-nowrap text-center" *ngIf="configuration.rowActionButtons || configuration.rowActionButtonsGroup"
+                  [class.dropdown]="configuration.rowActionButtonsGroup" width="32px">
+                  <ng-container *ngIf="configuration.rowActionButtonsGroup">
+                      <a href="#" class="dropdown-ellipses dropdown-toggle action mr-2 text-primary" role="button"
+                         data-toggle="dropdown"
+                         aria-haspopup="true" aria-expanded="false">
+                        <i class="fe fe-more-vertical"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <!-- <a (click)="requestEdit(item)" class="dropdown-item" *ngIf="itemEdit">
+                          <i class="fe fe-edit-2 mr-2"></i>
+                          Editar
+                        </a>
+                        <hr class="dropdown-divider" *ngIf="itemEdit"> -->
+                        <ng-container *ngFor="let rowActionButton of configuration.rowActionButtonsGroup">
+                          <a *ngIf="getRowActionButtonIsVisible(rowActionButton, item)"
+                             (click)="fireActionButtonEvent(item, rowActionButton)" class="dropdown-item"
+                             [attr.data-toggle]="rowActionButton.modalId ? 'modal' : ''" [attr.data-target]="rowActionButton.modalId ? '#'+rowActionButton.modalId : ''">
+                            <i *ngIf="rowActionButton.icon" class="fe {{rowActionButton.icon}} mr-2"></i>
+                            {{ rowActionButton.tooltipI18nKey | appTrans }}
+                          </a>
+                        </ng-container>
+                      </div>
+                  </ng-container>
+
+                  <ng-container *ngFor="let rowActionButton of configuration.rowActionButtons">
+                    <a *ngIf="!getRowActionButtonIsDisabled(rowActionButton, item) && getRowActionButtonIsVisible(rowActionButton, item)"
+                       (click)="fireActionButtonEvent(item, rowActionButton)" [attr.class]="'mr-3 action ' + getRowActionButtonColor(rowActionButton, item)"
+                       [attr.title]="rowActionButton.tooltipI18nKey | appTrans"
+                       [attr.data-toggle]="rowActionButton.modalId ? 'modal' : ''" [attr.data-target]="rowActionButton.modalId ? '#'+rowActionButton.modalId : ''">
+                      <i *ngIf="rowActionButton.icon" class="fe {{rowActionButton.icon}}"></i>
+                    </a>
+                    <span *ngIf="getRowActionButtonIsDisabled(rowActionButton, item) && getRowActionButtonIsVisible(rowActionButton, item)" class="mr-3 action text-muted"
+                          [attr.title]="rowActionButton.tooltipI18nKey | appTrans">
+                        <i *ngIf="rowActionButton.icon" class="fe {{rowActionButton.icon}}"></i>
+                      </span>
+                  </ng-container>
+                </td>
+
+
+                <td *ngFor="let column of getTotalColumns(); index as i" [class.text-nowrap]="column.nowrap">
+                  <app-base-column [column]="column" [rowData]="item"></app-base-column>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 *ngIf="!data">{{ 'table-empty-data' | appTrans }}</h3>
+
+        <app-custom-paginator [pageSizes]="configuration.pageSizes" [paginationInfo]="paginationInfo"
+                              (pageChange)="requestPage($event)"></app-custom-paginator>
+
+      </div>
+    </div>
+  </div>
+</div>

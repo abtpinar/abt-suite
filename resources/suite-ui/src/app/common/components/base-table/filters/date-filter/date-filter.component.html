@@ -1,0 +1,29 @@
+<div >
+  <div class="form-group">
+    <!-- <label for="date">{{ filterInput.textI18n | appTrans }}</label> -->
+    <input type="text" class="form-control" [(ngModel)]="filterValue"
+      placeholder="{{ filterInput.placeholderI18n | appTrans }}"
+      [attr.data-toggle]="'flatpickr-' + filterInput.field" data-flatpickr-mode="range"
+      (change)="onDateEvent($event)">
+
+    <!-- <p-calendar
+      name="start_date"
+      placeholder="{{ filterInput.placeholderI18n | appTrans }}"
+      dateFormat="yy-mm-dd"
+      selectionMode="range"
+      [(ngModel)]="filterValue"
+      [dataType]="'string'"
+      [icon]="'fa fa-calendar'"
+      [showIcon]="true"
+      [inline]="false"
+      [locale]="calendarLocalization"
+      [monthNavigator]="true"
+      [yearNavigator]="true"
+      [yearRange]="defaultYearRange"
+      [readonlyInput]="true"
+      (onSelect)="onDateEvent($event)"
+      (onClearClick)="onClearDateClick()"
+      [showButtonBar]="true">
+    </p-calendar> -->
+  </div>
+</div>

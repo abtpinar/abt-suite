@@ -1,0 +1,148 @@
+<div class="row" [formGroup]="farmerForm">
+
+    <div class="col-md-7">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-header-title">General</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>{{ 'farmers-page.farmer.code' | appTrans }}</label>
+                            <!--<span class="text-danger">&nbsp;*</span>-->
+                            <input type="text" class="form-control" formControlName="code" name="code">
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label>{{ 'farmers-page.farmer.ci' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="ci" name="ci">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{ 'farmers-page.farmer.first_name' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="first_name" name="first_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'farmers-page.farmer.middle_name' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="middle_name" name="middle_name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'farmers-page.farmer.last_name' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="last_name" name="last_name">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-5">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-header-title">Info</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{ 'farmers-page.farmer.unit' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <app-select [entities]="availableUnits" [prop]="'unit'" [displayProp]="'name'"
+                                        [idProp]="'id'"
+                                        formControlName="production_unit_id"></app-select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-header-title">{{'farmers-form.farmer.contact' | appTrans}}</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{ 'farmers-form.farmer.telephone' | appTrans }}</label>
+                            <!--<span class="text-danger">&nbsp;*</span>-->
+                            <!--<app-select [entities]="availableUnits" [prop]="'unit'" [displayProp]="'name'" [idProp]="'id'"
+                                        formControlName="production_unit_id"></app-select>-->
+                            <input type="text" class="form-control" formControlName="telephone_number"
+                                   name="telephone_number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{ 'farmers-form.farmer.cup_card' | appTrans }}</label>
+                            <!--<span class="text-danger">&nbsp;*</span>-->
+                            <!--<app-select [entities]="availableUnits" [prop]="'unit'" [displayProp]="'name'" [idProp]="'id'"
+                                        formControlName="production_unit_id"></app-select>-->
+                            <input type="text" class="form-control" formControlName="cup_card"
+                                   name="cup_card">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{ 'farmers-form.farmer.cup_card' | appTrans }}</label>
+                            <!--<span class="text-danger">&nbsp;*</span>-->
+                            <!--<app-select [entities]="availableUnits" [prop]="'unit'" [displayProp]="'name'" [idProp]="'id'"
+                                        formControlName="production_unit_id"></app-select>-->
+                            <input type="text" class="form-control" formControlName="mlc_card"
+                                   name="mlc_card">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-12">
+        <hr>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row align-items-end">
+            <div class="col"></div>
+            <div class="col-auto">
+                <a type="button" class="btn btn-light" routerLink="/farmers">
+                    {{ 'btn-cancel' | appTrans }}
+                </a>
+                <button type="submit" class="btn btn-primary ml-2" (click)="onSave(farmerForm)"
+                        [disabled]="!farmerForm.valid">
+                    <i class="fa fa-spin fa-refresh"></i>
+                    {{ 'btn-save' | appTrans }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

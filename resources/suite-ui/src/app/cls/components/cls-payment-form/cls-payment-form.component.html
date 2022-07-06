@@ -1,0 +1,82 @@
+<div [formGroup]="form">
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Fecha</label>
+          <app-calendar [prop]="'start_date'" formControlName="start_date" name="start_date"></app-calendar>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="table-responsive">
+
+    <table class="table table-sm card-table">
+      <thead>
+        <tr>
+          <th class="text-nowrap">Productor</th>
+          <th style="width: 15rem">No. Cuenta</th>
+          <th class="text-nowrap">Monto (CL)</th>
+          <th class="text-nowrap">Disponible</th>
+          <th style="width: 10rem">A Pagar</th>
+          <th class="text-nowrap">Saldo</th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr *ngFor="let cl of entities; let currentIndex = index;">
+          <td>
+            <p class="form-control mb-0 pl-0" style="background:transparent;border-color:transparent">{{ cl.farmer_name }}</p>
+          </td>
+          <td>
+              <div formArrayName="cls">
+                <div [formGroupName]="currentIndex">
+                  <app-mask formControlName="credit_card" [prop]="'credit_card' + currentIndex" [mask]="'0000-0000-0000-0000'" [placeholder]="'0000-0000-0000-0000'"></app-mask>
+                </div>
+              </div>        
+          </td>
+          <td>
+            <p class="form-control mb-0 pl-0" style="background:transparent;border-color:transparent">{{ getFinalCL(cl) | number:'1.2-2' }}</p>
+          </td>
+          <td>
+            <p class="form-control mb-0 pl-0" style="background:transparent;border-color:transparent">{{ getFinalCL(cl) | number:'1.2-2' }}</p>
+          </td>
+          <td>
+              <div formArrayName="cls">
+                <div [formGroupName]="currentIndex">
+                  <input type="text" class="form-control" placeholder="0.00" name="amount" formControlName="amount" />
+                </div>
+              </div>        
+          </td>
+          <td>
+            <p class="form-control mb-0 pl-0" style="background:transparent;border-color:transparent">{{ getFinalCL(cl) - getAmount(currentIndex) | number:'1.2-2' }}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row align-items-end">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-light" (click)="cancelEvent.emit()" data-dismiss="class-modal"
+              aria-label="Close">
+              {{ 'btn-cancel' | appTrans }}
+            </a>
+            <button type="submit" class="btn btn-primary ml-2" (click)="onSave(form)" [disabled]="!form.valid">
+              <i class="fa fa-spin fa-refresh"></i>
+              {{ 'btn-save' | appTrans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

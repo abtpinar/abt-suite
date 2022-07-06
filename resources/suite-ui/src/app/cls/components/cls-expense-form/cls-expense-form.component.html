@@ -1,0 +1,55 @@
+<div [formGroup]="form">
+
+
+  <div class="table-responsive">
+
+    <table class="table table-sm card-table">
+      <thead>
+        <tr>
+          <th class="text-nowrap">Productor</th>
+          <th style="width: 12rem">C.L.</th>
+          <th style="width: 10rem">Gasto</th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr *ngFor="let cl of entities; let currentIndex = index;">
+          <td>
+            <input type="text" class="form-control" [value]="cl.farmer_name" readonly style="background:transparent"/>
+          </td>
+          <td>
+            <input type="text" class="form-control" [value]="getAvailableCL(cl) | number:'1.2-2'" readonly style="background:transparent"/>
+          </td>
+          <td>
+              <div formArrayName="cls">
+                <div [formGroupName]="currentIndex">
+                  <input type="text" class="form-control"  name="expense" formControlName="expense" />
+                </div>
+              </div>        
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row align-items-end">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-light" (click)="cancelEvent.emit()" data-dismiss="class-modal"
+              aria-label="Close">
+              {{ 'btn-cancel' | appTrans }}
+            </a>
+            <button type="submit" class="btn btn-primary ml-2" (click)="onSave(form)" [disabled]="!form.valid">
+              <i class="fa fa-spin fa-refresh"></i>
+              {{ 'btn-save' | appTrans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

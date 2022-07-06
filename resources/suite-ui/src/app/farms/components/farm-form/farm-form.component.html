@@ -1,0 +1,240 @@
+<div class="row" [formGroup]="farmForm">
+
+    <div class="col-md-7">
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <div class="row align-items-end">
+                    <div class="col">
+                        <h4 class="card-header-title">General</h4>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Comercial</label>
+                            <input type="text" class="form-control" readonly [value]="comercial">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <h4 class="card-header-title">Datos Personales</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <app-farmer-selector-form-control [disable]="false" [useCustomTemplate]="false"
+                                                          formControlName="farmer">
+                        </app-farmer-selector-form-control>
+                    </div>
+                    <!--<div class="col-md-4">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.property_type' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <app-select
+                                    [entities]="getCodeTableItems(codeTablesService.availableTableKeys.PropertyTypes)"
+                                    [prop]="'property_type'" [displayProp]="'name'" [idProp]="'code'"
+                                    formControlName="property_type"></app-select>
+                        </div>
+                    </div>-->
+                </div>
+
+                <div class="row" *ngIf="selectedFarmer">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.unit' | appTrans }}</label>
+                            <input type="text" class="form-control readonly" readonly
+                                   [value]="selectedFarmer.unit.name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.farmer.code' | appTrans }}</label>
+                            <input type="text" class="form-control readonly" readonly
+                                   [value]="selectedFarmer.code?selectedFarmer.code:'--'">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-5">
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <h4 class="card-header-title">Expediente</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'farms-form.record.number' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="record_number"
+                                   name="record_number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'farms-form.area.total' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="total_area"
+                                   name="total_area">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'farms-form.date.of.issue' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="date" class="form-control" formControlName="activation_date"
+                                   name="activation_date">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'farms-form.years.validate' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="number" class="form-control" formControlName="expiration_date"
+                                   name="expiration_date">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'farms-form.propety.type' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <app-select
+                                    [entities]="getCodeTableItems(codeTablesService.availableTableKeys.PossesionTypes)"
+                                    [prop]="'possesion_type_code'" [displayProp]="'name'" [idProp]="'code'"
+                                    formControlName="possesion_type_code"></app-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{'farms-form.grpund.feature' | appTrans}}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <app-select
+                                    [entities]="getCodeTableItems(codeTablesService.availableTableKeys.GroundFeatures)"
+                                    [prop]="'ground_feature_code'" [displayProp]="'name'" [idProp]="'code'"
+                                    formControlName="ground_feature_code"></app-select>
+                        </div>
+                    </div>
+                </div>
+
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>{{ 'farms-form.coordinates' | appTrans }}</label>
+                        <span class="text-danger">&nbsp;*</span>
+                        <input type="text" class="form-control" formControlName="coordinates" name="coordinates">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Allotmnts -->
+<!--<div class="col-md-12">
+    <div class="card">
+        <app-loading-box *ngIf="isLoading"></app-loading-box>
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col">
+
+                    <h4 class="card-header-title">
+                        Parcelas
+                    </h4>
+
+                </div>
+                <div class="col-auto">
+
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li role="presentation" class="nav-item">
+                            <a href="#allotment" aria-controls="shipment" role="tab" data-toggle="tab"
+                               class="nav-link active">
+                                Parcela
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="allotment">
+                    <app-farm-allotment [entity]="farm" [availableCodeTables]="getCodeTableItems(codeTablesService.availableTableKeys.UsageTypes)">
+
+                    </app-farm-allotment>&lt;!&ndash;[entity]="farm" ]&ndash;&gt;
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>-->
+    <!--Allotmnts -->
+        <div class="col-md-12">
+            <hr>
+        </div>
+
+        <div class="col-md-12 mb-5">
+            <div class="row align-items-end">
+                <div class="col"></div>
+                <div class="col-auto">
+                    <a type="button" class="btn btn-light" routerLink="/farms">
+                        {{ 'btn-cancel' | appTrans }}
+                    </a>
+                    <button type="submit" class="btn btn-primary ml-2" (click)="onSave(farmForm)"
+                            [disabled]="!farmForm.valid">
+                        <i class="fa fa-spin fa-refresh"></i>
+                        {{ 'btn-save' | appTrans }}
+                    </button>
+                    <!--<button *ngIf=!isEdit type="submit" class="btn btn-primary ml-2"
+                            (click)="onSaveAndContinueAdd(contractForm)"
+                            [disabled]="!contractForm.valid">
+                        &lt;!&ndash;[disabled]="!contractForm.valid"&ndash;&gt;
+                        <i class="fa fa-spin fa-refresh"></i>
+                        {{ 'btn-add-other' | appTrans }}
+                    </button>-->
+            </div>
+        </div>
+    </div>
+
+</div>

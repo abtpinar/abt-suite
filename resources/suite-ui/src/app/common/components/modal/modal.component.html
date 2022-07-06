@@ -1,0 +1,31 @@
+    <div class="modal" [id]="id" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div [class]="'modal-dialog ' + classes" role="document">
+        <div class="modal-content">
+            <div class="modal-card card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+
+                            <!-- Title -->
+                            <h4 class="card-header-title">
+                               {{ title }}
+                            </h4>
+
+                        </div>
+                        <div class="col-auto">
+
+                            <!-- Close -->
+                            <button (click)="close()" type="button" class="close" [attr.data-dismiss]="id" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+
+                        </div>
+                    </div> <!-- / .row -->
+                </div>
+
+                <ng-content select="[template=modalContent]"></ng-content>
+
+            </div>
+        </div>
+    </div>
+</div>

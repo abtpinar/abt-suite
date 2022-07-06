@@ -1,0 +1,69 @@
+<app-loading-box *ngIf="isSaving || !items"></app-loading-box>
+
+<form novalidate #editForm="ngForm" (submit)="saveChanges($event)" >
+  <div class="card-body" *ngIf="items">
+    <div class="row">
+      <!-- Name -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="contact-name" appTrans="edit-contact.name">Variedad</label>
+          <span class="text-danger">&nbsp;*</span>
+            <app-select [entities]="items.availableTobaccoFamilies"
+                [prop]="'tobacco_family'" [displayProp]="'name'" [idProp]="'code'"
+                [(ngModel)]="itemClone.tobacco_family" [ngModelOptions]="{standalone: true}" 
+                #contactNameModel="ngModel"></app-select>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.phone">Mes</label>
+          <span class="text-danger">&nbsp;*</span>
+            <app-select [entities]="items.months"
+                [prop]="'month'" [displayProp]="'name'" [idProp]="'code'"
+                [(ngModel)]="itemClone.month" [ngModelOptions]="{standalone: true}" 
+                #monthModel="ngModel"></app-select>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <!-- Email -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.email" for="amount_p1">1ra Decena</label>
+          <input type="number" class="form-control" id="amount_p1" name="amount_p1"
+            [(ngModel)]="itemClone.amount_p1" #contactEmailModel="ngModel">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.email" for="amount_p2">2da Decena</label>
+          <input type="number" class="form-control" id="amount_p2" name="amount_p2"
+            [(ngModel)]="itemClone.amount_p2" #contactEmailModel="ngModel">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.email" for="amount_p3">3ra Decena</label>
+          <input type="number" class="form-control" id="amount_p3" name="amount_p3"
+            [(ngModel)]="itemClone.amount_p3" #contactEmailModel="ngModel">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row align-items-center">
+      <div class="col">
+      </div>
+      <div class="col-auto">
+        <a type="button" class="btn btn-sm btn-light mr-3" appTrans="edit-client-form.close"
+          (click)="cancelEdition()">Cancelar</a>
+        <button type="submit" class="btn btn-sm btn-primary" appTrans="edit-client-form.save-changes"
+          [disabled]="!editForm.valid">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+</form>

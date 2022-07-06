@@ -1,0 +1,16 @@
+<app-base-table
+    [data]="entities$ | async"
+    [isLoading]="isLoading$ | async"
+    [showInSection]="true"
+    [paginationInfo]="paginationInfo$ | async"
+    [configuration]="tableConfig"
+    (searchRequest)="search($event)"
+    (pageRequest)="loadPage($event)">
+
+  <ng-container template="cardHeaderTitle">
+    {{ 'production-units-page.title' | appTrans }}
+  </ng-container>
+
+</app-base-table>
+
+<app-production-units-modal></app-production-units-modal>

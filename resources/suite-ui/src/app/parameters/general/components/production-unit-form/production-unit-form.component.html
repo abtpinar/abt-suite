@@ -1,0 +1,100 @@
+<div [formGroup]="form">
+
+
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'production-units-page.unit.code' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="code" name="code">
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="form-group">
+          <label>{{ 'production-units-page.unit.name' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="name" name="name">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{ 'production-units-page.unit.address' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="address" name="address">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="form-group">
+          <label>{{ 'production-units-page.unit.president_name' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="president_name" name="president_name">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'production-units-page.unit.president_agreement_number' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="president_agreement_number" name="president_agreement_number">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{ 'production-units-page.unit.bank_account' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="bank_account" name="bank_account">
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="form-group">
+          <label>{{ 'production-units-page.unit.bank' | appTrans }}</label>
+          <span class="text-danger">&nbsp;*</span>
+          <input type="text" class="form-control" formControlName="bank" name="bank">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row align-items-end">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-light" (click)="cancelEvent.emit()" data-dismiss="class-modal" aria-label="Close">
+              {{ 'btn-cancel' | appTrans }}
+            </a>
+            <button type="submit" class="btn btn-primary ml-2" (click)="onSave(form)"
+                    [disabled]="!form.valid">
+              <i class="fa fa-spin fa-refresh"></i>
+              {{ 'btn-save' | appTrans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

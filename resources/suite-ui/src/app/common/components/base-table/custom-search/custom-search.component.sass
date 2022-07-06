@@ -1,0 +1,23 @@
+.filters-container
+  display: flex
+  flex-wrap: wrap
+
+button
+  margin: 0 6px
+
+
+button.advanced-search
+  position: relative
+  margin: 0 20px
+  &:focus
+    outline: none !important
+
+  &::after
+    content: ''
+    position: absolute
+    width: 1px
+    background: #cdcdcd
+    height: 34px
+    right: -15px
+    margin-top: -8px
+

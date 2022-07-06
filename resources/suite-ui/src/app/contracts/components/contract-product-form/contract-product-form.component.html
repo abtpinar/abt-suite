@@ -1,0 +1,64 @@
+<app-loading-box *ngIf="isSaving || !items"></app-loading-box>
+
+<form novalidate #editForm="ngForm" (submit)="saveChanges($event)">
+  <div class="card-body" *ngIf="items">
+    
+    <div class="row" >
+      <!-- Name -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="contact-name" appTrans="edit-contact.name">Producto</label>
+          <span class="text-danger">&nbsp;*</span>
+            <app-select [entities]="availableProducts"
+                [prop]="(items.basic ? 'b' : '') + 'product_id'" [displayProp]="'name'" [idProp]="'id'"
+                [(ngModel)]="itemClone.product_id" [ngModelOptions]="{standalone: true}" 
+                (onSelectedEntity)="handleProduct($event)"
+                #productModel="ngModel"></app-select>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.email" for="amount">Cantidad</label>
+          <input type="text" class="form-control" id="amount" name="amount"
+            [(ngModel)]="itemClone.amount" #contactEmailModel="ngModel">
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.email" for="price">Precio</label>
+          <input type="text" class="form-control" id="price" [value]="itemClone.price || '0.00'" readonly>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.email" for="price">U.M.</label>
+          <input type="text" class="form-control" id="price" [value]="getProduct(itemClone.product_id,'measurement_unit')" readonly>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label appTrans="edit-contact.email" for="import">Importe</label>
+          <input type="text" class="form-control" id="import" name="import"
+            [value]="(itemClone.amount * itemClone.price | number:'1.2-2') || '0.00'" readonly>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row align-items-center">
+      <div class="col">
+      </div>
+      <div class="col-auto">
+        <a type="button" class="btn btn-sm btn-light mr-3" appTrans="edit-client-form.close"
+          (click)="cancelEdition()">Cancelar</a>
+        <button type="submit" class="btn btn-sm btn-primary" appTrans="edit-client-form.save-changes"
+          [disabled]="!editForm.valid">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+</form>

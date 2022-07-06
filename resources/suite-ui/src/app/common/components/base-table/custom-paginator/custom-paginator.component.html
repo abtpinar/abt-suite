@@ -1,0 +1,28 @@
+<div class="row" *ngIf="paginationInfo">
+    <div class="col-auto">
+      <!-- PAGE SIZE CONFIG -->
+      <app-page-size-selector
+        class="pull-left"
+        *ngIf="paginationInfo"
+        [defaultPageSize]="paginationInfo.per_page"
+        [pageSizes]="pageSizes"
+        (sizeChange)="pageChanged({ page: 1, itemsPerPage: $event })"></app-page-size-selector>
+    </div>
+    <div class="col">
+        <div class="pt-3 mr-lg-5 pr-lg-5 text-center" role="status" aria-live="polite">
+            {{'table-showing' | appTrans}} {{ pageStartIndex }} {{'table-to' | appTrans}}
+            {{ pageEndIndex }} {{'table-of' | appTrans}} {{ totalItems }} {{'table-entries' | appTrans}}
+        </div>
+    </div>
+    <div class="col-auto">        
+        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group">
+              <button type="button" class="btn btn-secondary" (click)="pageChanged({page: first, itemsPerPage: paginationInfo.per_page})" [disabled]="page == 1 || totalPages == 0">{{'table-first' | appTrans}}</button>
+              <button type="button" class="btn btn-secondary" (click)="pageChanged({page: previous, itemsPerPage: paginationInfo.per_page})" [disabled]="page == 1 || totalPages == 0">{{'table-previous' | appTrans}}</button>
+              <button type="button" class="btn btn-secondary" [class.active]="pg.active" *ngFor="let pg of pages" [disabled]="pg.page == page" (click)="pageChanged({page: pg.page, itemsPerPage: paginationInfo.per_page})">{{ pg.page }}</button>
+              <button type="button" class="btn btn-secondary" (click)="pageChanged({page: next, itemsPerPage: paginationInfo.per_page})" [disabled]="page == totalPages || totalPages == 0">{{'table-next' | appTrans}}</button>
+              <button type="button" class="btn btn-secondary" (click)="pageChanged({page: last, itemsPerPage: paginationInfo.per_page})" [disabled]="page == totalPages || totalPages == 0">{{'table-last' | appTrans}}</button>
+            </div>
+          </div>
+    </div>
+</div>

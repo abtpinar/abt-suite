@@ -1,0 +1,6 @@
+<app-modal *ngIf="modalIsOpen$ | async" [id]="'sim-modal'"  [title]="'nuevo'">
+    <ng-container template="modalContent">
+        <app-sim-form [entity]="entity$ | async" (createEvent)="create($event)" (updateEvent)="update($event)" (cancelEvent)="close()">
+        </app-sim-form>
+    </ng-container>
+</app-modal>

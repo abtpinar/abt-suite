@@ -1,0 +1,16 @@
+<div class="box-tools">
+    <!-- <div id="page-size-configurator" class="input-group input-group-sm text-right"> -->
+    <div id="page-size-configurator" class="form-group">
+        <!-- <label class="pull-left" style="display: inline; font-weight: normal">
+            {{'table-show' | appTrans}}
+        </label> -->
+        <label>
+            <select class="form-control input-sm" [value]="defaultPageSize" (change)="changePageSize($event.target.value)">
+                <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+            </select>
+        </label>
+        <!-- <label class="pull-left" style="display: inline; font-weight: normal">
+            {{'table-entries' | appTrans}}
+        </label> -->
+    </div>
+</div>

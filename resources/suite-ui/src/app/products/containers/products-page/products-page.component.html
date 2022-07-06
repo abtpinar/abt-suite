@@ -1,0 +1,78 @@
+<app-base-table
+  [data]="entities$ | async"
+  [isLoading]="isLoading$ | async"
+  [paginationInfo]="paginationInfo$ | async"
+  [configuration]="tableConfig"
+  (searchRequest)="search($event)"
+  (pageRequest)="loadPage($event)">
+
+  <!-- Header -->
+  <div template="headerTemplateTitle">
+    <!-- Pretitle -->
+    <h6 class="header-pretitle">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/']"><span>{{
+                'pages.home' | appTrans }}</span></a></li>
+          <!-- <li class="breadcrumb-item active" aria-current="page"><span appTrans="new-client-form.title"></span></li> -->
+        </ol>
+      </nav>
+    </h6>
+
+    <!-- Title -->
+    <h1 class="header-title">
+      {{ 'products-page.title' | appTrans }}
+    </h1>
+  </div>
+
+  <div template="headerTemplateActions">
+    <button type="button" class="btn ml-2 btn-secondary" data-toggle="modal"
+      data-target="#exampleModal">
+      <i class="fe fe-upload"></i>
+      <span>{{ 'products-page.list-btn.upload-template' | appTrans}}</span>
+    </button>
+  </div>
+  <!-- CUSTOM HEADER TEMPLATE -->
+
+</app-base-table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'farmes-form.new.title'
+          | appTrans}}</h5>
+        <button type="button" #closebutton class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row" enctype="multipart/form-data" [formGroup]="formFile">
+          <div class="form-group col-md-10">
+            <!-- <label for="exampleFormControlFile1">{{'farmes-form.label.import' | appTrans}}</label>
+            <input type="file" class="inputfile" id="exampleFormControlFile1" >-->
+            <label class="file">
+              <input type="file" accept=".XLSX" #inputFile class="form-control"formControlName="products"
+                name="products" aria-label="File browser example" hidden
+                (change)="onSelectFile($event)">
+              <span class="custom-file-label">{{'farmes-form.label.import' |
+                appTrans}}</span>
+            </label>
+          </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  (click)="onCloseModal()">{{'farmes-form.label.btn.close'
+            | appTrans}}</button>
+          <button type="button" [disabled]="!formFile.valid" class="btn
+            btn-primary" (click)="onUploadFile()">{{'farmes-form.label.btn.import'
+            | appTrans}}</button>
+        </div>
+      
+    </div>
+  </div>
+</div>

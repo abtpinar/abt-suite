@@ -1,0 +1,43 @@
+<app-base-table
+        [data]="entities$ | async"
+        [isLoading]="isLoading$ | async"
+        [paginationInfo]="paginationInfo$ | async"
+        [configuration]="tableConfig"
+        (pageRequest)="loadPage($event)"
+        (itemEdit)="goToEdit($event)"
+        (searchRequest)="search($event)"
+        (pageRequest)="loadPage($event)">
+
+    <!-- Header -->
+    <div template="headerTemplateTitle">
+        <!-- Pretitle -->
+        <h6 class="header-pretitle">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/']"><span>{{ 'pages.home' | appTrans }}</span></a>
+                    </li>
+                    <!-- <li class="breadcrumb-item active" aria-current="page"><span appTrans="new-client-form.title"></span></li> -->
+                </ol>
+            </nav>
+        </h6>
+
+        <!-- Title -->
+        <h1 class="header-title">
+            {{ 'farms-page.title' | appTrans }}
+        </h1>
+    </div>
+
+    <div template="headerTemplateActions">
+        <!--<button-->
+        <!--type="button"-->
+        <!--class="btn btn-primary"-->
+        <!--(click)="add()"-->
+        <!--&gt;-->
+        <!--<i class="fa fa-plus"></i>-->
+        <!--{{ 'btn-add' | appTrans }}-->
+        <!--</button>-->
+
+    </div>
+    <!-- CUSTOM HEADER TEMPLATE -->
+
+</app-base-table>

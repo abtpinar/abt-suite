@@ -1,0 +1,43 @@
+<div [formGroup]="form">
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Motivo</label>
+          <app-select [entities]="availableRefundMotives" [prop]="'motive'" [idProp]="'code'" [displayProp]="'description'"  formControlName="motive"></app-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea class="form-control" rows="3" formControlName="description"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row align-items-end">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-light" (click)="cancelEvent.emit()" data-dismiss="class-modal"
+              aria-label="Close">
+              {{ 'btn-cancel' | appTrans }}
+            </a>
+            <button type="submit" class="btn btn-primary ml-2" (click)="onSave(form)" [disabled]="!form.valid">
+              <i class="fa fa-spin fa-refresh"></i>
+              {{ 'btn-save' | appTrans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

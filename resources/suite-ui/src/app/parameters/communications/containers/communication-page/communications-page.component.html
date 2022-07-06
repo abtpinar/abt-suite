@@ -1,0 +1,85 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+
+        <!-- HEADER -->
+        <div class="header">
+
+          <!-- Body -->
+          <div class="header-body">
+            <div class="row align-items-end">
+              <div class="col">
+
+                <!-- Pretitle -->
+                <h6 class="header-pretitle">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="['/']"><span>{{
+                            'pages.home' | appTrans }}</span></a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="['/', 'control-panel']"><span>{{
+                            'control-panel-page.title' | appTrans }}</span></a></li>
+                      <!-- <li class="breadcrumb-item active" aria-current="page"><span appTrans="new-client-form.title"></span></li> -->
+                    </ol>
+                  </nav>
+                </h6>
+
+                <!-- Title -->
+                <h1 class="header-title" appTrans="communications-page.title"></h1>
+
+              </div>
+
+              <div class="col-auto">
+                <ul class="nav nav-tabs header-tabs" role="tablist">
+                  <li class="nav-item" *ngxPermissionsOnly="['ADMINISTRATOR']">
+                    <a href="#mobiles" aria-controls="mobiles" role="tab" data-toggle="tab"
+                       class="nav-link text-center active">
+                      {{ 'mobiles-page.title' | appTrans }}
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#sims" aria-controls="sims" role="tab" data-toggle="tab"
+                       class="nav-link text-center">
+                      {{ 'sims-page.title' | appTrans }}
+                    </a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a href="#period-invoice-rate" aria-controls="period-invoice-rate" role="tab" data-toggle="tab"
+                       class="nav-link text-center">
+                      {{ 'mobile-brands-page.title' | appTrans }}
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#gas-toll-rate" aria-controls="gas-toll-rate" role="tab" data-toggle="tab"
+                       class="nav-link text-center">
+                      {{ 'mobile-models-page.title' | appTrans }}
+                    </a>
+                  </li> -->
+                </ul>
+              </div>
+
+            </div> <!-- / .row -->
+
+          </div> <!-- / .header-body -->
+
+        </div> <!-- / .header -->
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="mobiles" >
+            <app-mobiles-page></app-mobiles-page>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="sims" >
+            <app-sims-page></app-sims-page>
+          </div>
+          <!-- <div role="tabpanel" class="tab-pane" id="period-invoice-rate" >
+            <p></p>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="gas-toll-rate" >
+            <p></p>
+          </div> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="d-flex align-items-center bg-auth border-top border-top-2 border-primary vh-100" style="display: block;">
+<div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-6 offset-xl-2 offset-md-1 order-md-2 mb-5 mb-md-0">
+
+        <!-- Image -->
+        <div class="text-center">
+          <img *ngIf="!isLoggingIn" [src]="'/assets/images/login.svg'" alt="..." class="img-fluid">
+          <app-loading-box *ngIf="isLoggingIn"></app-loading-box>
+        </div>
+
+      </div>
+      <div class="col-12 col-md-5 col-xl-4 order-md-1 my-5">
+        
+        <!-- Heading -->
+        <h1 class="display-4 text-center mb-3">
+          {{ 'login-form.sign-in' | appTrans }}
+        </h1>
+        
+        <!-- Subheading -->
+        <p class="text-muted text-center mb-5">
+            {{ 'login-form.title' | appTrans }}
+        </p>
+        
+        <!-- Form -->
+        <form novalidate #loginForm="ngForm" (submit)="login($event)">
+
+          <!-- Email address -->
+          <div class="form-group">
+
+            <!-- Label -->
+            <label>{{'register-form.email' | appTrans}}</label>
+
+            <!-- Input -->
+            <input type="email" class="form-control" placeholder="true" name="email" [(ngModel)]="email" appTrans="register-form.email-placeholder" #formEmail="ngModel" required [email]="true">
+
+            <div *ngIf="formEmail.invalid && (formEmail.dirty || formEmail.touched)">
+                <small class="form-field-error" appTrans="register-form.email.required"
+                       *ngIf="formEmail.errors.required"></small>
+                <small class="form-field-error" appTrans="register-form.email.invalid"
+                       *ngIf="formEmail.errors.email"></small>
+            </div>
+
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col">
+                    
+                <!-- Label -->
+                <label>{{'register-form.password' | appTrans}}</label>
+
+              </div>
+              <div class="col-auto">
+                
+                <!-- Help text -->
+                <a href="#" class="form-text small text-muted">
+                  {{'login-form.forgot-my-password' | appTrans}}
+                </a>
+
+              </div>
+            </div> <!-- / .row -->
+
+            <!-- Input group -->
+            <div class="input-group input-group-merge">
+
+              <!-- Input -->
+              <input type="password" class="form-control form-control-appended" name="password"
+              [(ngModel)]="password" appTrans="register-form.password" placeholder="true"
+              required minlength="8" #formPassword="ngModel">
+
+              <!-- Icon -->
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fe fe-eye"></i>
+                </span>
+              </div>
+
+            </div>
+
+
+
+            <div *ngIf="formPassword.invalid && (formPassword.dirty || formPassword.touched)">
+                <small class="form-field-error" appTrans="register-form.password.required"
+                       *ngIf="formPassword.errors.required"></small>
+                <small class="form-field-error" appTrans="register-form.password.minlength"
+                       *ngIf="formPassword.errors.minlength"></small>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn btn-lg btn-block btn-primary mb-3" appTrans="register-form.login" [disabled]="!loginForm.valid"></button>
+
+          <!-- Link -->
+          <!-- <div class="text-center">
+            <small class="text-muted text-center">
+              Don't have an account yet? <a href="#">Sign up</a>.
+            </small>
+          </div> -->
+          
+        </form>
+
+      </div>
+    </div> <!-- / .row -->
+  </div> <!-- / .container -->
+  </div> <!-- / .container -->

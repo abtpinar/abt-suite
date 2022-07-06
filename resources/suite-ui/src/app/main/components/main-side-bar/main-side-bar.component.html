@@ -1,0 +1,76 @@
+<aside class="main-sidebar">
+  <section class="sidebar">
+
+      <ul class="sidebar-menu tree" data-widget="tree">
+
+          <li [class.treeview]="item.hasChildren" *ngFor="let item of activeMenuItems">
+
+              <ng-container *ngxPermissionsOnly="item.permissions">
+
+              <a [routerLink]="[item.url]" [routerLinkActive]="item.activeClassName" *ngIf="!item.hasChildren">
+                  <i class="fa" [class]="item.icon"></i>
+                  <span [appTrans]="item.textTranslationKey" style="z-index: 1000"></span>
+                  <span [appTrans]="item.url"></span>
+              </a>
+
+              <a *ngIf="item.hasChildren" class="no-children">
+                  <i class="fa" [class]="item.icon"></i>
+                  <span [appTrans]="item.textTranslationKey" style="z-index: 1000"></span>
+                  <span [appTrans]="item.url"></span>
+                  <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+              </a>
+
+                  <ul class="treeview-menu" *ngIf="item.hasChildren">
+
+                  <li [class.treeview]="child.hasChildren" *ngFor="let child of item.children">
+
+                      <ng-container *ngxPermissionsOnly="child.permissions">
+
+                      <a [routerLink]="[child.url]" [routerLinkActive]="child.activeClassName" *ngIf="!child.hasChildren">
+                          <i class="fa" [class]="child.icon"></i>
+                          <span [appTrans]="child.textTranslationKey" style="z-index: 1000"></span>
+                          <span [appTrans]="child.url"></span>
+                      </a>
+
+                      <a *ngIf="child.hasChildren" class="has-children">
+                          <i class="fa" [class]="child.icon"></i>
+                          <span [appTrans]="child.textTranslationKey" style="z-index: 1000"></span>
+                          <span [appTrans]="child.url"></span>
+                          <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                      </a>
+                      <ul class="treeview-menu" *ngIf="child.hasChildren">
+
+                          <li *ngFor="let child2 of child.children">
+
+                              <ng-container *ngxPermissionsOnly="child2.permissions">
+
+                              <a [routerLink]="[child2.url]" [routerLinkActive]="child2.activeClassName">
+                                  <i class="fa" [class]="child2.icon"></i>
+                                  <span [appTrans]="child2.textTranslationKey" style="z-index: 1000"></span>
+                                  <span [appTrans]="child2.url"></span>
+                              </a>
+
+                              </ng-container>
+
+                          </li>
+
+                      </ul>
+
+                      </ng-container>
+
+                  </li>
+
+              </ul>
+
+              </ng-container>
+
+          </li>
+
+      </ul>
+
+  </section>
+</aside>

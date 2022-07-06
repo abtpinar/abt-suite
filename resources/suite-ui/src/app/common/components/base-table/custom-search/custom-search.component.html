@@ -1,0 +1,45 @@
+<div class="modal-body">
+  <!-- Close -->
+  <a class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </a>
+
+  <h2 class="text-center mb-2">
+    Filtros de Búsqueda
+  </h2>
+
+  <p class="text-center mb-4">
+    Refina los resultados de tu consulta!
+  </p>
+
+  <hr class="mb-4">
+
+  <div class="row filters-container">
+    <div *ngFor="let filter of filtersConfig.filters" class="col-12">
+      <app-filter-input [clear]="filterClearNotifier$" [filterInput]="filter" (dataEvent)="onDataEvent(filter, $event)"
+        (keyup.enter)="triggerSearch()"></app-filter-input>
+    </div>
+  </div>
+
+  <hr class="mb-4">
+
+  <div class="row filters-container">
+    <div *ngFor="let filter of filtersConfig.additionalFilters" class="col-12">
+      <app-filter-input [clear]="filterClearNotifier$" [filterInput]="filter" (dataEvent)="onDataEvent(filter, $event)">
+      </app-filter-input>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer border-0">
+
+  <button class="btn btn-block btn-primary mt-auto" type="button" (click)="triggerSearch()" data-dismiss="modal">
+    <span> {{'table-search' | appTrans}}</span>
+  </button>
+
+  <button class="btn btn-block btn-light mt-auto" type="button" (click)="clearSearch()" data-dismiss="modal">
+    <span> {{'table-clear' | appTrans}}</span>
+  </button>
+
+</div>

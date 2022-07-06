@@ -1,0 +1,5 @@
+<app-modal *ngIf="modalIsOpen$ | async" [id]="'cls-refund-modal'" [title]="'Rembolsar Gasto'" [classes]="'modal-lg'">
+    <ng-container template="modalContent">
+        <app-cls-refund-form [entities]="entities$ | async" [availableRefundMotives]="availableRefundMotives$ | async" (createEvent)="create($event)" (cancelEvent)="close()"></app-cls-refund-form>
+    </ng-container>
+</app-modal>

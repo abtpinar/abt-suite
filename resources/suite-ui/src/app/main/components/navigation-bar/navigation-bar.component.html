@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-light" id="topnav">
+  <div class="container">
+
+    <!-- Toggler -->
+    <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Brand -->
+    <a [routerLink]="['/']" class="navbar-brand mr-auto mr-lg-5 order-lg-first">
+      <img src="{{logoSrc}}" alt="..." class="navbar-brand-img">
+    </a>
+
+    <!-- User -->
+    <div class="navbar-user">
+
+      <div class="dropdown mr-4 d-none d-lg-flex" *ngxPermissionsOnly="['ADMINISTRATOR', 'CONTRACT_CENTER']">
+
+        <!-- Toggle -->
+        <a [routerLink]="['/control-panel']" class="text-white">
+                <span class="icon">
+                  <i class="fe fe-settings"></i>
+                </span>
+        </a>
+
+      </div>
+
+      <!-- Dropdown -->
+      <div class="dropdown">
+
+        <!-- Toggle -->
+        <a href="#" class="avatar avatar-sm dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="assets/images/avatar.jpg" alt="..." class="avatar-img rounded-circle">
+        </a>
+
+        <!-- Menu -->
+        <div class="dropdown-menu dropdown-menu-right">
+          <a [routerLink]="['/users/profile']" class="dropdown-item" appTrans="navigation-role.profile"></a>
+          <hr class="dropdown-divider">
+          <a (click)="logout()" class="dropdown-item pointer" appTrans="navigation-role.sign-out"></a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse mr-auto order-lg-first" id="navbar">
+
+      <!-- Navigation -->
+      <ul class="navbar-nav mr-auto">
+        <ng-container *ngFor="let item of activeMenuItems; index as i">
+
+          <li *ngxPermissionsOnly="item.permissions" class="nav-item" [class.dropdown]="item.hasChildren">
+
+
+            <a *ngIf="!item.hasChildren" class="nav-link" [routerLink]="[item.url]">
+              <i *ngIf="item.icon" [attr.class]="item.icon + ' icon'"></i> {{ item.textTranslationKey | appTrans }}
+            </a>
+
+            <a href="#" *ngIf="item.hasChildren" [id]="'m' + i" class="nav-link dropdown-toggle " role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i *ngIf="item.icon" [attr.class]="item.icon + ' icon'"></i> {{ item.textTranslationKey | appTrans }}
+            </a>
+            <ul class="dropdown-menu" *ngIf="item.hasChildren" [attr.aria-labelledby]="'m' + i">
+              <ng-container *ngFor="let child of item.children; index as j">
+
+                <hr *ngIf="child.activeClassName == 'divider'" class="dropdown-divider">
+
+                <ng-container *ngIf="child.activeClassName != 'divider'">
+
+                  <li [class.dropright]="child.hasChildren" *ngxPermissionsOnly="child.permissions">
+                    <a *ngIf="!child.hasChildren" class="dropdown-item" [routerLink]="[child.url]">
+                      <i *ngIf="child.icon" [attr.class]="child.icon + ' icon'"></i> {{ child.textTranslationKey | appTrans }}
+                    </a>
+
+                    <a href="#" *ngIf="child.hasChildren" class="dropdown-item dropdown-toggle " [id]="'m' + i + 'n' + j" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i *ngIf="child.icon" [attr.class]="child.icon + ' icon'"></i> {{ child.textTranslationKey | appTrans }}
+                    </a>
+                    <div *ngIf="child.hasChildren" class="dropdown-menu" [attr.aria-labelledby]="'m' + i + 'n' + j">
+                      <ng-container *ngFor="let child2 of child.children">
+
+                        <a *ngIf="child2.permissions" class="dropdown-item" [routerLink]="[child2.url]" [appTrans]="child2.textTranslationKey"></a>
+
+                      </ng-container>
+                    </div>
+                  </li>
+
+                </ng-container>
+
+              </ng-container>
+
+            </ul>
+
+          </li>
+
+        </ng-container>
+
+      </ul>
+
+    </div>
+
+  </div> <!-- / .container -->
+</nav>

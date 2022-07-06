@@ -1,0 +1,13 @@
+<div>
+  <div class="form-group">
+    <!-- <label>{{ filterInput.textI18n | appTrans }}</label> -->
+    <input
+      type="text"
+      class="form-control"
+      [disabled]="filterInput.disabled"
+      placeholder="{{ filterInput.placeholderI18n | appTrans }}"
+      [(ngModel)]="filterValue"
+      (change)="dataEvent.emit($event)"
+    />
+  </div>
+</div>

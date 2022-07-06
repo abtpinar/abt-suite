@@ -1,0 +1,58 @@
+<div class="main-content">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12">
+
+				<!-- HEADER -->
+				<div class="header">
+
+					<!-- Body -->
+					<div class="header-body">
+						<div class="row align-items-end">
+							<div class="col">
+
+								<!-- Pretitle -->
+								<h6 class="header-pretitle">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a [routerLink]="['/']"><span>{{
+														'pages.home' | appTrans }}</span></a></li>
+											<li class="breadcrumb-item"><a [routerLink]="['/', 'communication-contracts']"><span>{{
+														'communication-contracts-page.title' | appTrans }}</span></a></li>
+											<!-- <li class="breadcrumb-item active" aria-current="page"><span appTrans="new-client-form.title"></span></li> -->
+										</ol>
+									</nav>
+								</h6>
+
+								<!-- Title -->
+								<h1 class="header-title">
+									<span *ngIf="!!(contract$ | async)"
+										appTrans="communication-contracts-form.edit.title"></span>
+									<span *ngIf="!(contract$ | async)"
+										appTrans="communication-contracts-form.new.title"></span>
+								</h1>
+
+							</div>
+
+						</div> <!-- / .row -->
+
+					</div> <!-- / .header-body -->
+
+				</div> <!-- / .header -->
+
+
+
+				<div *ngIf="(isLoading$ | async)" class="text-center"
+					style="position: absolute;z-index: 9999;left: 50%;top: 50%;">
+					<app-loading-box></app-loading-box>
+				</div>
+
+				<app-contract-form [contract]="contract$ | async" [initialEmployee]="employee$ | async" 
+					[availableMobiles]="availableMobiles$ | async" [availableSims]="availableSims$ | async"
+					(create)="create($event)" (update)="update($event)">
+				</app-contract-form>
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<ng-container *ngIf="entity$ | async as entity">
+    <app-modal *ngIf="modalIsOpen$ | async" [id]="'class-modal'" [title]="entity.id ? 'Editar' : 'Crear'">
+        <ng-container template="modalContent">
+            <app-class-form [entity]="entity" [availableClassesTypes]="availableClassesTypes$ | async"
+                            [availableTobaccoType]="availableTobaccoType$ | async" (createEvent)="create($event)"
+                            (updateEvent)="update($event)" (cancelEvent)="close()"></app-class-form>
+        </ng-container>
+    </app-modal>
+</ng-container>

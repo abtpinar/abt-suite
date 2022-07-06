@@ -1,0 +1,67 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+
+        <!-- HEADER -->
+        <div class="header">
+
+          <!-- Body -->
+          <div class="header-body">
+            <div class="row align-items-end">
+              <div class="col">
+
+                <!-- Pretitle -->
+                <h6 class="header-pretitle">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="['/']"><span>{{
+                            'pages.home' | appTrans }}</span></a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="['/', 'control-panel']"><span>{{
+                            'control-panel-page.title' | appTrans }}</span></a></li>
+                      <!-- <li class="breadcrumb-item active" aria-current="page"><span appTrans="new-client-form.title"></span></li> -->
+                    </ol>
+                  </nav>
+                </h6>
+
+                <!-- Title -->
+                <h1 class="header-title" appTrans="general-page.title"></h1>
+
+              </div>
+
+              <div class="col-auto">
+                <ul class="nav nav-tabs header-tabs" role="tablist">
+                  <li class="nav-item" *ngxPermissionsOnly="['ADMINISTRATOR']">
+                    <a href="#production-units" aria-controls="production-units" role="tab" data-toggle="tab"
+                       class="nav-link text-center active">
+                      {{ 'production-units-page.title' | appTrans }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div> <!-- / .row -->
+
+          </div> <!-- / .header-body -->
+
+        </div> <!-- / .header -->
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="production-units" >
+            <app-production-units-page></app-production-units-page>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="sims" >
+            <p></p>
+          </div>
+          <!-- <div role="tabpanel" class="tab-pane" id="period-invoice-rate" >
+            <p></p>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="gas-toll-rate" >
+            <p></p>
+          </div> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

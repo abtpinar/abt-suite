@@ -1,0 +1,8 @@
+<ng-container *ngIf="entity$ | async as entity">
+<app-modal *ngIf="modalIsOpen$ | async" [id]="'production-unit-modal'" [title]="entity.id ? 'Editar' : 'Crear'">
+    <ng-container template="modalContent">
+        <app-production-unit-form [entity]="entity" (createEvent)="create($event)"
+            (updateEvent)="update($event)" (cancelEvent)="close()"></app-production-unit-form>
+    </ng-container>
+</app-modal>
+</ng-container>

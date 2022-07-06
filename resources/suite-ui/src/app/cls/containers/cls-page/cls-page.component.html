@@ -1,0 +1,102 @@
+<app-base-table
+    [data]="entities$ | async"
+    [isLoading]="isLoading$ | async"
+    [paginationInfo]="paginationInfo$ | async"
+    [configuration]="tableConfig"
+    (searchRequest)="search($event)"
+    (pageRequest)="loadPage($event)">
+
+  <!-- Header -->
+  <div template="headerTemplateTitle">
+    <!-- Pretitle -->
+    <h6 class="header-pretitle">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/']"><span>{{ 'pages.home' | appTrans }}</span></a></li>
+          <li class="breadcrumb-item active" aria-current="page"><span>{{ viewUnits ? 'CCS' : 'Productores' }}</span></li>
+        </ol>
+      </nav>
+    </h6>
+
+    <!-- Title -->
+    <h1 class="header-title">
+      {{ 'cls-results-page.title' | appTrans }}
+    </h1>
+  </div>
+
+  <div template="headerTemplateActions">
+    <button type="button" *ngxPermissionsOnly="['ADMINISTRATOR', 'CL_IMPORTER', 'CL_TAX']"
+            class="btn btn-primary mr-5"
+            [disabled]="isLoading$ | async"
+            (click)="updateFromSIPAC()">
+      <!-- <i class="fe fe-refresh-ccw"></i> -->
+      {{ 'cls-results-page.list-btn.import' | appTrans }}
+    </button>
+
+    <button type="button" *ngxPermissionsOnly="['ADMINISTRATOR', 'CL_IMPORTER', 'CL_TAX']"
+            class="btn btn-primary"
+            (click)="downloadPDF()">
+      <i class="fe fe-layers"></i>
+      Balance General
+    </button>
+
+
+    <app-export-excel [excelConfiguration]="excelConfiguration" [searchTerms]="searchTerms$ | async">
+    </app-export-excel>
+
+    <ng-container *ngxPermissionsOnly="['ADMINISTRATOR', 'CONTRACT_CENTER']">
+
+    </ng-container>
+
+    <div class="btn-group ml-5 mr-2" *ngIf="entities$ | async as entities">
+
+      <button type="button" class="btn btn-primary" [attr.title]="'cls-results-page.list-btn.process' | appTrans"
+              [disabled]="(isProcessing$ | async) || (isLoading$ | async) || noCLsToAction"
+              (click)="processSelectedCLs()" *ngxPermissionsOnly="['ADMINISTRATOR', 'CL_TAX']">
+        <span class="spinner-grow spinner-grow-sm text-primary" role="status" *ngIf="(isProcessing$ | async); else notProcessing">
+          <span class="sr-only">Loading...</span>
+        </span>
+        <ng-template #notProcessing>
+          <i class="fe fe-check"></i>
+        </ng-template>
+      </button>
+
+      <button type="button" class="btn btn-primary" [attr.title]="'cls-results-page.list-btn.adjust' | appTrans"
+              [disabled]="(isProcessing$ | async) || (isLoading$ | async) || noCLsToAction"  *ngxPermissionsOnly="['ADMINISTRATOR', 'CL_TAX']"
+              (click)="addExpense(entities)" data-toggle="modal" data-target="#cls-expense-modal">
+        <span class="spinner-grow spinner-grow-sm text-primary" role="status" *ngIf="(isProcessing$ | async); else notAdjust">
+          <span class="sr-only">Loading...</span>
+        </span>
+        <ng-template #notAdjust>
+          <i class="fe fe-pie-chart"></i>
+        </ng-template>
+      </button>
+
+      <button type="button" class="btn btn-primary" [attr.title]="'cls-results-page.list-btn.retire' | appTrans"
+              [disabled]="(isProcessing$ | async) || (isLoading$ | async) || noCLsToAction"  *ngxPermissionsOnly="['ADMINISTRATOR', 'CL_PAYMENT']"
+              (click)="addPayment(entities)" data-toggle="modal" data-target="#cls-payment-modal">
+        <span class="spinner-grow spinner-grow-sm text-primary" role="status" *ngIf="(isProcessing$ | async); else notRetire">
+          <span class="sr-only">Loading...</span>
+        </span>
+        <ng-template #notRetire>
+          <i class="fe fe-credit-card"></i>
+        </ng-template>
+      </button>
+    </div>
+
+    <button type="button" *ngxPermissionsOnly="['ADMINISTRATOR', 'CL_IMPORTER', 'CL_TAX']"
+            class="btn btn-secondary ml-5"
+            [attr.title]=""
+            (click)="showUnits()">   
+            <i class="fe" [class.fe-eye]="!viewUnits" [class.fe-eye-off]="viewUnits"></i>   
+            {{ 'CCS' }}
+    </button>
+
+  </div>
+  <!-- CUSTOM HEADER TEMPLATE -->
+
+</app-base-table>
+
+<app-cls-expense-modal [showUnits]="viewUnits"></app-cls-expense-modal>
+<app-cls-payment-modal [showUnits]="viewUnits"></app-cls-payment-modal>
+<app-cls-refund-modal></app-cls-refund-modal>

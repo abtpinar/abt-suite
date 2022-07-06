@@ -1,0 +1,102 @@
+<div class="row" [formGroup]="employeeForm">
+
+  <div class="col-md-7">
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-header-title">Datos Personales</h4>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="form-group">
+              <label>{{ 'employees-page.employee.first_name' | appTrans }}</label>
+              <span class="text-danger">&nbsp;*</span>
+              <input type="text" class="form-control" formControlName="first_name" name="first_name">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>{{ 'employees-page.employee.dni' | appTrans }}</label>
+              <span class="text-danger">&nbsp;*</span>
+              <input type="text" class="form-control" formControlName="dni" name="dni">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'employees-page.employee.middle_name' | appTrans }}</label>
+              <span class="text-danger">&nbsp;*</span>
+              <input type="text" class="form-control" formControlName="middle_name" name="middle_name">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'employees-page.employee.last_name' | appTrans }}</label>
+              <span class="text-danger">&nbsp;*</span>
+              <input type="text" class="form-control" formControlName="last_name" name="last_name">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-5">
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-header-title">Informacion Laboral</h4>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{ 'employees-page.employee.department' | appTrans }}</label>
+              <span class="text-danger">&nbsp;*</span>
+              <input type="text" class="form-control" formControlName="department" name="department">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{ 'employees-page.employee.occupation' | appTrans }}</label>
+              <span class="text-danger">&nbsp;*</span>
+              <input type="text" class="form-control" formControlName="occupation" name="occupation">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-12">
+    <hr>
+  </div>
+
+  <div class="col-md-12">
+    <div class="row align-items-end">
+      <div class="col"></div>
+      <div class="col-auto">
+        <a type="button" class="btn btn-light" routerLink="/employees">
+          {{ 'btn-cancel' | appTrans }}
+        </a>
+        <button type="submit" class="btn btn-primary ml-2" (click)="onSave(employeeForm)" [disabled]="!employeeForm.valid">
+          <i class="fa fa-spin fa-refresh"></i>
+          {{ 'btn-save' | appTrans }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

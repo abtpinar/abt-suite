@@ -1,0 +1,342 @@
+<div class="row" [formGroup]="contractForm" *ngIf="contract">
+
+    <div class="col-md-7">
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <div class="row align-items-end">
+                    <div class="col">
+                        <h4 class="card-header-title">General</h4>
+                    </div>
+                    <div class="col-auto">
+                        <span [innerHTML]="status"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Comercial</label>
+                            <input type="text" class="form-control" readonly [value]="comercial">
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="isEdit">
+                        <div class="form-group">
+                            <label>Fecha de Activacion</label>
+                            <input type="text" class="form-control" readonly [value]="contract.date">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <h4 class="card-header-title">Datos Personales</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <app-farmer-selector-form-control [disable]="false" [useCustomTemplate]="false"
+                                                          formControlName="farmer">
+                        </app-farmer-selector-form-control>
+                    </div>
+                    <!--<div class="col-md-4">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.property_type' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <app-select
+                                    [entities]="getCodeTableItems(codeTablesService.availableTableKeys.PropertyTypes)"
+                                    [prop]="'property_type'" [displayProp]="'name'" [idProp]="'code'"
+                                    formControlName="property_type"></app-select>
+                        </div>
+                    </div>-->
+                </div>
+
+                <div class="row" *ngIf="selectedFarmer">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.unit' | appTrans }}</label>
+                            <input type="text" class="form-control readonly" readonly
+                                   [value]="selectedFarmer.unit.name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.farmer.code' | appTrans }}</label>
+                            <input type="text" class="form-control readonly" readonly [value]="selectedFarmer.code">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-5">
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <h4 class="card-header-title">Producción</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.tobacco_type' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <app-select [entities]="getCodeTableItems(codeTablesService.availableTableKeys.TobaccoType)"
+                                        [prop]="'tobacco_type'" [displayProp]="'name'" [idProp]="'code'"
+                                        formControlName="tobacco_type"
+                                        (onSelectedEntity)="changeTobaccoTypeHandler($event)"></app-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.planting_type' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <app-select
+                                    [entities]="getCodeTableItems(codeTablesService.availableTableKeys.PlantingTypes)"
+                                    [prop]="'planting_type'" [displayProp]="'name'" [idProp]="'code'"
+                                    formControlName="planting_type"
+                                    (onSelectedEntity)="changePlantingTypeHandler($event)"></app-select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.thousands_plants' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="thousands_plants"
+                                   name="thousands_plants">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.planting_area' | appTrans }}</label>
+                            <!--<span class="text-danger">&nbsp;*</span>-->
+                            <input type="text" class="form-control" formControlName="planting_area" name="planting_area"
+                                   readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.production.qq' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="production" name="production">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.production.tt' | appTrans }}</label><!--&nbsp;-->
+                            <input type="text" class="form-control" readonly
+                                   [value]="contractForm.get('production').value / 21.74 | number:'1.2-2'">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.performance' | appTrans }}</label>
+                            <!--<span class="text-danger">&nbsp;*</span>-->
+                            <input type="text" class="form-control" formControlName="performance" name="performance"
+                                   readonly
+                                   placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.export_porcentage' | appTrans }}</label>
+                            <span class="text-danger">&nbsp;*</span>
+                            <input type="text" class="form-control" formControlName="export_porcentage"
+                                   name="export_porcentage">
+                        </div>
+                    </div>
+                    <div  *ngIf="isEdit" class="col-md-6">
+                        <div class="form-group">
+                            <label>{{ 'contracts-page.contract.purchase_budget' | appTrans }}</label>
+                            <!--<span class="text-danger">&nbsp;*</span>-->
+                            <input type="text" class="form-control" formControlName="purchase_budget"
+                                   name="purchase_budget">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+
+                        <h4 class="card-header-title">
+                            Cronogramas
+                        </h4>
+
+                    </div>
+                    <div class="col-auto">
+
+                        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                            <li *ngIf="isEdit" role="presentation" class="nav-item">
+                                <a href="#shipment" aria-controls="shipment" role="tab" data-toggle="tab"
+                                   class="nav-link active">
+                                    Riega de Semilleros
+                                </a>
+                            </li>
+                            <li role="presentation" class="nav-item">
+                                <a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab"
+                                   class="nav-link">
+                                    Siembra
+                                </a>
+                            </li>
+                            <li *ngIf="isEdit" role="presentation" class="nav-item">
+                                <a href="#harvest" aria-controls="harvest" role="tab" data-toggle="tab"
+                                   class="nav-link">
+                                    Acopio
+                                </a>
+                            </li>
+                            <li [hidden]="!isTP" role="presentation" class="nav-item">
+                                <a href="#tobacco_class" aria-controls="tobacco_class" role="tab" data-toggle="tab"
+                                   class="nav-link">
+                                    Beneficio
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="card-body"> -->
+            <div class="tab-content">
+                <div *ngIf="isEdit" role="tabpanel" class="tab-pane active" id="shipment">
+                    <app-contract-irrigation-schedule [entity]="contract"
+                                                      [availableTobaccoFamilies]="getCodeTableItems(codeTablesService.availableTableKeys.TobaccoFamilies)"></app-contract-irrigation-schedule>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="contacts">
+                    <app-contract-planting-schedule [entity]="contract"
+                                                    [availableTobaccoFamilies]="getCodeTableItems(codeTablesService.availableTableKeys.TobaccoFamilies)"></app-contract-planting-schedule>
+                </div>
+                <div *ngIf="isEdit" role="tabpanel" class="tab-pane" id="harvest">
+                    <app-contract-harvest-schedule [entity]="contract"
+                                                   [availableTobaccoFamilies]="getCodeTableItems(codeTablesService.availableTableKeys.TobaccoFamilies)"></app-contract-harvest-schedule>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tobacco_class">
+                    <app-contract-tobacco-class-schedule *ngIf="tobaccoType == 'TP'" [entity]="contract"
+                                                         [availableTobaccoClasses]="availableTobaccoTapadoClasses"></app-contract-tobacco-class-schedule>
+                    <app-contract-tobacco-class-schedule *ngIf="tobaccoType == 'BY'" [entity]="contract"
+                                                         [availableTobaccoClasses]="availableTobaccoBurleyClasses"></app-contract-tobacco-class-schedule>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="card">
+            <app-loading-box *ngIf="isLoading"></app-loading-box>
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+
+                        <h4 class="card-header-title">
+                            Insumos y Servicios
+                        </h4>
+
+                    </div>
+                    <div class="col-auto">
+
+                        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                            <li role="presentation" class="nav-item">
+                                <a *ngIf="isEdit" href="#basic-products" aria-controls="basic-products" role="tab" data-toggle="tab"
+                                   class="nav-link active">
+                                    Canasta Basica
+                                </a>
+                            </li>
+                            <li role="presentation" class="nav-item">
+                                <a href="#other-products" aria-controls="other-products" role="tab" data-toggle="tab"
+                                   class="nav-link">
+                                    Insumos y Servicios
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="card-body"> -->
+            <div class="tab-content">
+                <div *ngIf="isEdit" role="tabpanel" class="tab-pane active" id="basic-products">
+                    <app-contract-product [basic]="true" [entity]="contract" [edit]="isEdit"
+                                          [availableProducts]="availableProducts"></app-contract-product>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="other-products">
+                    <app-contract-product [entity]="contract" [availableProducts]="availableProducts" [edit]="isEdit"></app-contract-product>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+        <hr>
+    </div>
+
+    <div class="col-md-12 mb-5">
+        <div class="row align-items-end">
+            <div class="col"></div>
+            <div class="col-auto">
+                <a type="button" class="btn btn-light" routerLink="/contracts">
+                    {{ 'btn-cancel' | appTrans }}
+                </a>
+                <button type="submit" class="btn btn-primary ml-2" (click)="onSave(contractForm)"
+                        [disabled]="!contractForm.valid">
+                    <i class="fa fa-spin fa-refresh"></i>
+                    {{ 'btn-save' | appTrans }}
+                </button>
+                <button *ngIf=!isEdit type="submit" class="btn btn-primary ml-2"
+                        (click)="onSaveAndContinueAdd(contractForm)"
+                        [disabled]="!contractForm.valid">
+                    <!--[disabled]="!contractForm.valid"-->
+                    <i class="fa fa-spin fa-refresh"></i>
+                    {{ 'btn-add-other' | appTrans }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

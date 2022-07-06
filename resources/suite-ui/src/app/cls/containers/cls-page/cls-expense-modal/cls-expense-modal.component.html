@@ -1,0 +1,5 @@
+<app-modal *ngIf="modalIsOpen$ | async" [id]="'cls-expense-modal'" [title]="'cls-results-page.list-btn.adjust' | appTrans">
+    <ng-container template="modalContent">
+        <app-cls-expense-form [entities]="entities$ | async" [showUnits]="showUnits" (createEvent)="create($event)" (cancelEvent)="close()"></app-cls-expense-form>
+    </ng-container>
+</app-modal>

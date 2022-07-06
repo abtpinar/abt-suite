@@ -1,0 +1,60 @@
+<div class="loading-container" *ngIf="isLoading">
+    <app-loading-box></app-loading-box>
+</div>
+
+<div [class.invisible]="isEditing">
+    
+    
+    <div class="table-responsive" *ngIf="items.length"><!--*ngIf="items.length"-->
+        <table class="table table-sm card-table">
+            <thead>
+                
+                <tr>
+                    <th>Acciones</th>
+                    <th appTrans="edit-contact.name">Nro</th>
+                    <th appTrans="edit-contact.email">DivisióN</th>
+                    <th appTrans="edit-contact.email">área</th>
+                    <th appTrans="edit-contact.email">Uso</th>
+                </tr>
+            </thead>
+
+            
+    
+            <tbody>
+                <ng-container *ngFor="let item of itemsObservable | async">
+                    <tr (dblclick)="selectItem(item)">
+                    <td width="55px" class="text-center">
+                        <a class="text-danger mr-2 action" (click)="deleteItem(item)"><!--(click)="deleteItem(item)"-->
+                            <i class="fe fe-trash"></i>
+                        </a>
+                    </td>
+                    <td>{{item.number }}</td>
+                    <td style="width:150px">{{ item.division}}</td>
+                    <td style="width:180px" class="text-nowrap">{{ item.area}}</td>
+                    <td style="width:150px">{{ getUsageType(item.usage_type_code)}}</td>
+                    <!--<td style="width:150px">{{ item.usage_type }}</td>-->
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+    <!--<div class="card-body" *ngIf="!items.length">
+        <h4 class="text-center" appTrans="edit-client-list.contact.no-contacts"></h4>
+    </div>-->
+
+    <div class="card-footer">
+        <div class="row align-items-center">
+            <div class="col">
+                
+                <a class="btn btn-sm btn-primary" data-toggle="modal" (click)="newItem()"><!--(click)="newItem()"-->
+                    <i class="fe fe-plus"></i> <span appTrans="btn-add"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [class.invisible]="!isEditing">
+    <app-farm-allotment-form #editForm [availableCodeTables]="availableCodeTables"></app-farm-allotment-form>
+</div>

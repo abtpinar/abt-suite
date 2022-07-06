@@ -1,0 +1,5 @@
+<app-modal *ngIf="modalIsOpen$ | async" [id]="'cls-payment-modal'" [title]="'Efectuar Pago'" [classes]="'modal-xl'">
+    <ng-container template="modalContent">
+        <app-cls-payment-form [entities]="entities$ | async" [showUnits]="showUnits" (createEvent)="create($event)" (cancelEvent)="close()"></app-cls-payment-form>
+    </ng-container>
+</app-modal>

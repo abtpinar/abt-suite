@@ -1,0 +1,226 @@
+<div class="row" [formGroup]="contractForm">
+
+  <div class="col-md-7">
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-header-title">General</h4>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-9">
+            <app-employee-selector-form-control [disable]="false" [useCustomTemplate]="false"
+                                              formControlName="employee">
+
+            </app-employee-selector-form-control>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="selectedEmployee">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'contracts-page.contract.department' | appTrans }}</label>
+              <input type="text" class="form-control readonly" readonly [value]="selectedEmployee.department">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'contracts-page.contract.occupation' | appTrans }}</label>
+              <input type="text" class="form-control readonly" readonly [value]="selectedEmployee.occupation">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-5">
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-header-title">Acceso al Dominio</h4>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h4>no disponible</h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-7">
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-header-title">Telefono Movil Asociado</h4>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>{{ 'communication-contracts-page.contract.mobile' | appTrans }}</label>
+              <app-select [entities]="availableMobiles"
+                [prop]="'mobile_id'" [idProp]="'id'" [displayProp]="'`${entity.mobile_model.data.brand_name}, ${entity.mobile_model.data.name} (${entity.mac})`'" 
+                [useTemplate]="true" formControlName="mobile_id">
+              </app-select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Estado del Dispositivo</label>
+              <div class="custom-control custom-switch mt-3 mb-2">
+                <input type="checkbox" class="custom-control-input" id="isNew" formControlName="isNew">
+                <label class="custom-control-label" for="isNew">Nuevo en caja.</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Accesorios</label>
+              <div class="custom-control custom-switch mt-3 mb-2">
+                <input type="checkbox" class="custom-control-input" id="charger" formControlName="charger">
+                <label class="custom-control-label" for="charger">Cargador</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <div class="custom-control custom-switch mt-3 mb-2">
+                <input type="checkbox" class="custom-control-input" id="cable" formControlName="cable">
+                <label class="custom-control-label" for="cable">Cable USB</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <div class="custom-control custom-switch mt-3 mb-2">
+                <input type="checkbox" class="custom-control-input" id="headphones" formControlName="headphones">
+                <label class="custom-control-label" for="headphones">Auriculares</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Adicionales</label>
+              <div class="custom-control custom-switch mt-3 mb-2">
+                <input type="checkbox" class="custom-control-input" id="mica" formControlName="mica">
+                <label class="custom-control-label" for="mica">Mica</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <div class="custom-control custom-switch mt-3 mb-2">
+                <input type="checkbox" class="custom-control-input" id="cover" formControlName="cover">
+                <label class="custom-control-label" for="cover">Cover</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <div class="custom-control custom-switch mt-3 mb-2">
+                <input type="checkbox" class="custom-control-input" id="card_sd" formControlName="card_sd">
+                <label class="custom-control-label" for="card_sd">Tarjeta SD</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-5">
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-header-title">SIM Asociada</h4>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{ 'communication-contracts-page.contract.sim' | appTrans }}</label>
+              <app-select [entities]="availableSims"
+                [prop]="'sim_id'" [idProp]="'id'"
+                [displayProp]="'`+53 ${entity.number}`'" [useTemplate]="true"
+                formControlName="sim_id"></app-select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'communication-contracts-page.contract.call_time' | appTrans }}</label>
+              <input type="text" class="form-control" formControlName="call_time" name="call_time">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'communication-contracts-page.contract.sms_credit' | appTrans }}</label>
+              <input type="text" class="form-control" formControlName="sms_credit" name="sms_credit">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>{{ 'communication-contracts-page.contract.data_plan' | appTrans }}</label>
+              <input type="text" class="form-control" formControlName="data_plan" name="data_plan">
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>{{ 'communication-contracts-page.contract.ip_address' | appTrans }}</label>
+              <input type="text" class="form-control" formControlName="ip_address" name="ip_address">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-12">
+    <hr>
+  </div>
+
+  <div class="col-md-12 mb-5">
+    <div class="row align-items-end">
+      <div class="col"></div>
+      <div class="col-auto">
+        <a type="button" class="btn btn-light" routerLink="/communication-contracts">
+          {{ 'btn-cancel' | appTrans }}
+        </a>
+        <button type="submit" class="btn btn-primary ml-2" (click)="onSave(contractForm)" [disabled]="!contractForm.valid">
+          <i class="fa fa-spin fa-refresh"></i>
+          {{ 'btn-save' | appTrans }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
